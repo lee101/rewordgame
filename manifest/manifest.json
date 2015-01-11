@@ -1,0 +1,24 @@
+{
+    "name": "Word Smashing",
+    "description": "Giant Chess",
+    "version": "4",
+    "manifest_version": 2,
+    "app": {
+        "urls": [
+            "*://www.wordsmashing.com/"
+        ],
+        "launch": {
+            "web_url": "http://www.wordsmashing.com/"
+        }
+    },
+    "icons": {
+        "128": "/static/img/wordsmashing_icon128.png",
+        "64": "/static/img/wordsmashing_icon64.png",
+        "60": "/static/img/wordsmashing_icon60.png"
+    },
+    "fullscreen": "true",
+    "developer": {
+        "name": "Word Smashing",
+        "url": "http://www.wordsmashing.com"
+    }
+}

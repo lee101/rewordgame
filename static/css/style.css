@@ -1,0 +1,310 @@
+.gameon-board .even {
+  background-color: #373435;
+}
+.gameon-board .odd {
+  background-color: #494949;
+}
+.gameon-board td {
+  border: 1px solid gray;
+}
+.gameon-board table {
+  overflow: auto;
+}
+.popover {
+  min-width: 180px;
+}
+.mm-logo {
+  display: block;
+  text-align: center;
+}
+.mm-logo__image {
+  margin: 0 auto;
+}
+.mm-play-btn {
+  width: auto;
+  display: block;
+  text-align: center;
+  padding: 40px 0;
+}
+.mm-difficulty__btn {
+  width: 120px;
+  margin: 10px 0;
+}
+@media (min-width: 310px) and (min-height: 380px) {
+  .mm-difficulty__btn {
+    width: 150px;
+    margin: 10px 0;
+  }
+}
+.mm-level-controls {
+  margin: 0 auto;
+  width: 300px;
+}
+@media (min-width: 961px) and (max-width: 1280px) and (min-height: 750px) {
+  .mm-level-controls {
+    width: 400px;
+  }
+}
+@media (min-width: 1280px) and (min-height: 961px) {
+  .mm-level-controls {
+    width: 600px;
+  }
+}
+.gameon-starbar-template {
+  display: none;
+}
+.mm-starbar--center {
+  margin: 15px auto;
+  max-width: 300px;
+}
+.gameon-volume-template {
+  display: none;
+}
+.mm-volume {
+  float: right;
+}
+.mm-end-condition {
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+}
+@media (min-width: 300px) {
+  .mm-end-condition {
+    font-size: 18px;
+  }
+}
+@media (min-width: 961px) {
+  .mm-end-condition {
+    font-size: 26px;
+  }
+}
+.mm-article-theme {
+  text-align: left;
+  font-size: 20px;
+}
+@media (max-width: 600px) {
+  .mm-article-theme {
+    font-size: 18px;
+  }
+}
+.mm-article-theme-bg {
+  background-color: white;
+  padding-left: 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+.mm-responsivead-bottom {
+  margin: 0 auto;
+  text-align: center;
+}
+.mm-responsivead-right {
+  width: 0px;
+  left: inherit;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: 50px;
+  margin-right: 50px;
+  display: none;
+}
+@media (min-width: 600px) {
+  .mm-responsivead-right {
+    margin-right: 1px;
+    width: 160px;
+    display: block;
+  }
+}
+@media (min-width: 720px) {
+  .mm-responsivead-right {
+    margin-right: 25px;
+    width: 160px;
+    display: block;
+  }
+}
+@media (min-width: 1131px) {
+  .mm-responsivead-right {
+    width: 250px;
+  }
+}
+@media (min-width: 1500px) {
+  .mm-responsivead-right {
+    width: 400px;
+  }
+}
+.mm-hide-btn {
+  position: relative;
+  left: 0;
+  right: 0;
+}
+.mm-like {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 4px;
+  margin: 0 auto;
+  text-align: center;
+}
+@media (max-width: 481px) {
+  .mm-like {
+    display: none;
+  }
+}
+.mm-sharing-btns {
+  font-size: 21.66px;
+}
+@media (min-width: 481px) {
+  .mm-sharing-btns {
+    font-size: 27.36px;
+  }
+}
+@media (min-width: 641px) {
+  .mm-sharing-btns {
+    font-size: 29.64px;
+  }
+}
+@media (min-width: 961px) {
+  .mm-sharing-btns {
+    font-size: 30.78px;
+  }
+}
+@media (min-width: 1025px) {
+  .mm-sharing-btns {
+    font-size: 31.92px;
+  }
+}
+@media (min-width: 1281px) {
+  .mm-sharing-btns {
+    font-size: 34.2px;
+  }
+}
+.mm-share-btn {
+  margin-top: 10px;
+  font-size: 36px;
+}
+.mm-share-btn--twitter {
+  color: #4098fd;
+}
+.mm-share-btn--google-plus {
+  color: #ed142e;
+}
+.mm-share-btn--pinterest {
+  color: #ca2027;
+}
+.mm-share-btn--linked-in {
+  color: #1a84bc;
+}
+.mm-share-btn--reddit {
+  color: #cee3f8;
+}
+.mm-share-btn--stumbleupon {
+  color: #ea4b24;
+}
+.ws-header {
+  background-color: white;
+  border-bottom: 1px solid #CCCCCC;
+  display: table;
+  width: 100%;
+}
+.ws-header--item {
+  width: 33%;
+  display: table-cell;
+  vertical-align: middle;
+}
+.ws-main-btn {
+  width: 200px;
+  font-size: 18px;
+  padding: 6px 12px;
+}
+@media (min-height: 420px) {
+  .ws-main-btn {
+    width: 200px;
+    font-size: 26px;
+    padding: 10px 16px;
+  }
+}
+.ws-main-btn-container {
+  margin: 5px 0;
+}
+.modal-body {
+  padding: 0;
+  text-align: left;
+}
+@media (min-width: 320px) {
+  .modal-body {
+    padding: 20px;
+  }
+}
+.modal-header {
+  border-bottom: none;
+}
+@media (max-height: 698px) {
+  .gameon-hidden-xs {
+    display: none;
+  }
+}
+@media (max-width: 698px) {
+  .gameon-hidden-xs {
+    display: none;
+  }
+}
+@media (min-height: 699px) and (min-width: 699px) {
+  .gameon-visible-xs {
+    display: none;
+  }
+}
+.article-theme {
+  text-align: left;
+  font-size: 25px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.article-theme p {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+@media (max-width: 600px) {
+  .article-theme {
+    font-size: 18px;
+  }
+}
+@media (min-width: 600px) {
+  .article-theme {
+    width: 80%;
+  }
+}
+.footer {
+  display: inline;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+.footer__link {
+  font-size: small;
+  margin: 0 11px;
+  color: Gray;
+}
+.mm-end-message {
+  font-size: 20px;
+}
+.mm-bonus-message {
+  font-size: 20px;
+}
+body {
+  font-family: Verdana, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  text-align: center;
+  font-style: normal;
+  height: 100%;
+}
+@font-face {
+  font-family: chessFont;
+  src: url(/static/fonts/chessmaya.ttf);
+}
+.chess-font {
+  font-family: chessFont;
+}
+/*# sourceMappingURL=/static/css/style.css.map */
