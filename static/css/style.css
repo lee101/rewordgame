@@ -300,11 +300,9 @@ body {
   font-style: normal;
   height: 100%;
 }
-@font-face {
-  font-family: chessFont;
-  src: url(/static/fonts/chessmaya.ttf);
-}
-.chess-font {
-  font-family: chessFont;
+.chess-piece {
+  font-size: 40px;
+  background-color: inherit;
+  border: 0 solid white;
 }
 /*# sourceMappingURL=/static/css/style.css.map */

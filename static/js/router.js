@@ -117,13 +117,11 @@
 
     var prerenderedPages = {
         "/": "home",
-        '/play': 'play',
         '/timed': 'timed',
         '/classic': 'classic',
         '/versus': 'versus',
 
         '/instructions': 'instructions',
-        '/learn-english': 'learn-english',
         "/about": "about",
         "/contact": "contact",
         "/terms": "terms",
@@ -135,9 +133,9 @@
     });
     jQuery.extend(routes, {
         //pages needing js rendering
+        'play': 'play',
         'versus/1player': 'versus1player',
-        'versus/2player': 'versus2player',
-        'learn-english/:levelkey': 'learnenglishlevelkey',
+        'versus/2player': 'versus2player'
     });
 
     var Router = Backbone.Router.extend({
@@ -151,7 +149,6 @@
         'versus1player': defaultHandler('/versus/1player'),
         'versus2player': defaultHandler('/versus/2player'),
         'instructions': defaultHandler('/instructions'),
-        'learn-english': defaultHandler('/learn-english'),
         'contact': defaultHandler('/contact'),
         'about': defaultHandler('/about'),
         'terms': defaultHandler('/terms'),
