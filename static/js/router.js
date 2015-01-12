@@ -11,48 +11,7 @@
         return false
     };
 
-    APP.gotoLevel = function (level) {
 
-        if (level.computer_opponent) {
-            APP.goto('/versus/1player');
-            return false;
-        }
-        else if (level.is_multiplayer) {
-            APP.goto('/versus/2player');
-            return false;
-        }
-
-        //find level idx
-        var levelsByDifficulty = fixtures.getLevelsByDifficulty(level.difficulty);
-        var levelIdx = 1;
-        for (var i = 0; i < levelsByDifficulty.length; i++) {
-            if (levelsByDifficulty[i].id == level.id) {
-                break;
-            }
-            levelIdx++;
-        }
-        APP.goto('/campaign/' + fixtures.difficultyIdToName(level.difficulty) + '/' + levelIdx);
-        return false
-    };
-
-    APP.gotoLevelSilently = function (level) {
-        if (level.computer_opponent) {
-            APP.router.versus1player();
-            return false;
-        }
-        else if (level.is_multiplayer) {
-            APP.router.versus2player();
-            return false;
-        }
-        else if (level.required_words) {
-            APP.router.learnenglishlevelkey(level.urlkey);
-            return false
-        }
-
-        var levelIdx = fixtures.getLevelIdx(level);
-        APP.router.campaigndifficultylevel(fixtures.difficultyIdToName(level.difficulty), levelIdx);
-        return false
-    };
 
     APP.stepBack = function () {
         var currrentPath = window.location.hash;
@@ -158,7 +117,7 @@
 
     var prerenderedPages = {
         "/": "home",
-        '/campaign': 'campaign',
+        '/play': 'play',
         '/timed': 'timed',
         '/classic': 'classic',
         '/versus': 'versus',
@@ -179,21 +138,16 @@
         'versus/1player': 'versus1player',
         'versus/2player': 'versus2player',
         'learn-english/:levelkey': 'learnenglishlevelkey',
-        'campaign/:difficulty': 'campaigndifficulty',
-        'campaign/:difficulty/:level': 'campaigndifficultylevel'
     });
 
     var Router = Backbone.Router.extend({
         // Define routes
         'routes': routes,
         'home': defaultHandler('/'),
-        'campaign': defaultHandler('/campaign'),
-        'campaigndifficulty': defaultHandler('/campaign/:difficulty'),
-        'campaigndifficultylevel': defaultHandler('/campaign/:difficulty/:level'),
+        'play': defaultHandler('/play'),
         'timed': defaultHandler('/timed'),
         'classic': defaultHandler('/classic'),
         'versus': defaultHandler('/versus'),
-        'learnenglishlevelkey': defaultHandler('/learn-english/:levelkey'),
         'versus1player': defaultHandler('/versus/1player'),
         'versus2player': defaultHandler('/versus/2player'),
         'instructions': defaultHandler('/instructions'),

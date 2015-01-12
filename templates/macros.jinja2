@@ -39,7 +39,22 @@
         window.fixtures = (function () {
             "use strict";
             var self = {};
-
+            self.pieces = {
+                'queen': '♚',
+                'king': '♛',
+                'castle': '♜',
+                'bishop': '♝',
+                'horse': '♞',
+                'pawn': '♟'
+            };
+            self.whitePieces = {
+                'queen': '♔',
+                'king': '♕',
+                'castle': '♖',
+                'bishop': '♗',
+                'horse': '♘',
+                'pawn': '♙'
+            };
             return self;
         })();
 

@@ -129,15 +129,14 @@ var mmochess = new (function () {
             for (var i = 0; i < level.width * level.height; i++) {
                 tiles.push(new EmptyTile());
             }
+            //TODO automate init
+//            for (var i = 0; i < level.num_players; i++) {
+//                initPlayerAt(tiles, [2, 2], 1);
+//            }
             initPlayerAt(tiles, [2,2], 1);
+            initPlayerAt(tiles, [11,2], 2);
+            initPlayerAt(tiles, [2,11], 3);
 
-            for (var i = 0; i < level.num_start_letters; i++) {
-                var isRed = true;
-                if (level.is_multiplayer && i >= level.num_start_letters / 2) {
-                    isRed = false;
-                }
-                tiles.push(new MainTile(gameon.wordutils.getRandomLetter(), isRed));
-            }
             return tiles;
         };
         function initPlayerAt(tiles, yxPos, playerNum) {
@@ -260,7 +259,12 @@ var mmochess = new (function () {
             self.selected = false;
 
             self.render = function () {
-                //TODO
+                var pieceText = fixtures.pieces[type];
+                if (self.playerNum === 1) {
+                    pieceText = fixtures.whitePieces[type];
+                }
+                return '<button type="button" class="chess-piece chess-piece--player-'+playerNum+'">' + pieceText +
+                    '</button>';
             };
             return self;
         };

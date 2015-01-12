@@ -203,11 +203,9 @@ app = ndb.toplevel(webapp2.WSGIApplication([
                                                ('/learn-english', LearnEnglishHandler),
                                                ('/learn-english/(.*)', EnglishLevelHandler),
 
-                                               ('/campaign', CampaignHandler),
-
                                                # need js rendering
-                                               (r'/campaign/..*', MainHandler),
-                                               (r'/campaign/..*/..*', MainHandler),
+                                               ('/play', CampaignHandler),
+
                                                (r'/versus/..*', MainHandler),
 
                                                (r'/tests', TestsHandler),
