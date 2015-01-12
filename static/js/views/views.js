@@ -27,7 +27,7 @@
                 "num_players": 6
             };
 
-            APP.game = new wordsmashing.Game(level);
+            APP.game = new mmochess.Game(level);
             APP.game.render(self.$el);
 
             return self;
@@ -152,7 +152,7 @@
                 "computer_opponent": true
             };
 
-            APP.game = new wordsmashing.Game(level);
+            APP.game = new mmochess.Game(level);
             APP.game.render(self.$el);
 
             return self;
@@ -183,7 +183,7 @@
                 "computer_opponent": false
             };
 
-            APP.game = new wordsmashing.Game(level);
+            APP.game = new mmochess.Game(level);
             APP.game.render(self.$el);
 
             return self;
@@ -237,7 +237,7 @@
         render: function () {
             var self = this;
             gameon.getUser(function (user) {
-                self.$el.html(evutils.render('templates/shared/header.jinja2', {'path': self.path, 'user': user}));
+                self.$el.html(evutils.render('static/templates/shared/header.jinja2', {'path': self.path, 'user': user}));
             });
 
             return self;
@@ -250,7 +250,7 @@
         },
 
         render: function () {
-            this.$el.html(evutils.render('templates/shared/footer.jinja2', {'path': this.path}));
+            this.$el.html(evutils.render('static/templates/shared/footer.jinja2', {'path': this.path}));
             return this;
         }
     });

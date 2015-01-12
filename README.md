@@ -1,4 +1,4 @@
-wordsmashing
+mmochess
 ============
 
 WordSmashing.com an online word search puzzle game and app

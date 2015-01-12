@@ -58,6 +58,7 @@ window.evutils = new (function () {
             client_side: true,
             fixtures: fixtures,
             title: document.title,
+            path: document.location.pathname,
             description: $('meta[name=description]').attr('content')
         }, opts);
         return nunjucks.render(template, opts, callback);

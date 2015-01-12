@@ -5,10 +5,10 @@
     "manifest_version": 2,
     "app": {
         "urls": [
-            "*://www.wordsmashing.com/"
+            "*://www.mmochess.com/"
         ],
         "launch": {
-            "web_url": "http://www.wordsmashing.com/?noads=true"
+            "web_url": "http://www.mmochess.com/?noads=true"
         }
     },
     "icons": {

@@ -1,4 +1,4 @@
-application: wordsmashing
+application: mmochess
 version: 1
 runtime: python27
 api_version: 1
@@ -71,10 +71,10 @@ automatic_scaling:
 pagespeed:
 
   url_blacklist:
-  - http://www.wordsmashing.com/static/music/*
-  - http://www.wordsmashing.com/sitemap
-  - http://www.wordsmashing.com/manifest.webapp
-  - https://wordsmashing.appspot.com/buy
+  - http://www.mmochess.com/static/music/*
+  - http://www.mmochess.com/sitemap
+  - http://www.mmochess.com/manifest.webapp
+  - https://mmochess.appspot.com/buy
   # enabled_rewriters:
   # - CollapseWhitespace
   # - CombineHeads
