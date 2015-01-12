@@ -1,20 +1,5 @@
 describe("fixtures", function () {
 
-    it('getLevelsByDifficulty', function () {
-        expect(fixtures.getLevelsByDifficulty('easy').length).toBeGreaterThan(0);
-        expect(fixtures.getLevelsByDifficulty(fixtures.EASY).length).toBeGreaterThan(0);
-        expect(fixtures.getLevelsByDifficulty(fixtures.MEDIUM).length).toBeGreaterThan(0);
-        expect(fixtures.getLevelsByDifficulty(fixtures.HARD).length).toBeGreaterThan(0);
-        expect(fixtures.getLevelsByDifficulty(fixtures.EXPERT).length).toBeGreaterThan(0);
-    });
-
-    it('gets Levels', function () {
-        expect(fixtures.getLevelById(1).id).toBe(1);
-        expect(fixtures.getLevelById(20).id).toBe(20);
-        expect(fixtures.getLevelById(40).id).toBe(40);
-        expect(fixtures.getLevelIdx(40)).toBe(40-16-16);
-
-    });
     it('other stuff', function () {
         var numEasyLevels = fixtures.EASY_LEVELS.length;
         var numMediumLevels = fixtures.MEDIUM_LEVELS.length;
@@ -24,16 +9,11 @@ describe("fixtures", function () {
     });
 
 });
-describe("WordSmashing", function () {
+describe("mmochess", function () {
 
     it('lets you navigate around', function (done) {
         APP.goto('/');
-        APP.goto('/versus');
-        APP.goto('/versus/1player');
-        APP.goto('/versus/2player');
-        APP.goto('/campaign');
-        APP.goto('/campaign/easy');
-        APP.goto('/campaign/easy/1');
+        APP.goto('/play');
         specHelpers.once(function () {
             APP.game.board.getTile(0, 0).click();
             APP.game.board.getTile(3, 3).click();

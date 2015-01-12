@@ -21,6 +21,7 @@
             var self = this;
 
             var level = {
+                "computer_opponent": true,
                 "height": 60,
                 "width": 60,
                 "num_players": 6
