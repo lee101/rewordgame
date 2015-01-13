@@ -1,5 +1,5 @@
 {
-    "name": "Word Smashing",
+    "name": "Big Multiplayer Chess",
     "description": "Giant Chess",
     "version": "4",
     "manifest_version": 2,
@@ -18,7 +18,7 @@
     },
     "fullscreen": "true",
     "developer": {
-        "name": "Word Smashing",
+        "name": "Big Multiplayer Chess",
         "url": "http://www.wordsmashing.com"
     }
 }

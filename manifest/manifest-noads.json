@@ -1,14 +1,14 @@
 {
-    "name": "Word Smashing",
+    "name": "Big Multiplayer Chess",
     "description": "Make words! lots of words! two at once! heaps in a row! then you'll get bonus points! Get words up, down, forward and backwards! On easy, get words with 2+ letters, on medium 3+, Hard 4+! When the board fills up its game over!",
     "version": "4",
     "manifest_version": 2,
     "app": {
         "urls": [
-            "*://www.mmochess.com/"
+            "*://bigmultiplayerchess.com/"
         ],
         "launch": {
-            "web_url": "http://www.mmochess.com/?noads=true"
+            "web_url": "http://bigmultiplayerchess.com/?noads=true"
         }
     },
     "icons": {
@@ -18,7 +18,7 @@
     },
     "fullscreen": "true",
     "developer": {
-        "name": "Word Smashing",
+        "name": "Big Multiplayer Chess",
         "url": "http://www.wordsmashing.com"
     }
 }
