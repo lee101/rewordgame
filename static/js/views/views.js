@@ -22,8 +22,8 @@
 
             var level = {
                 "computer_opponent": true,
-                "height": 60,
-                "width": 60,
+                "height": 12*3,
+                "width": 12*2,
                 "num_players": 6
             };
 

@@ -304,5 +304,39 @@ body {
   font-size: 40px;
   background-color: inherit;
   border: 0 solid white;
+  padding: 0;
+}
+.chess-piece--player-1 {
+  color: #e6e6e6;
+}
+.chess-piece--player-3 {
+  color: #391ee2;
+}
+.chess-piece--player-4 {
+  color: #e6393f;
+}
+.chess-piece--player-5 {
+  color: #2ee527;
+}
+.chess-piece--player-6 {
+  color: #39e4d9;
+}
+.gameon-board td {
+  min-width: 55px;
+  width: 55px;
+  min-height: 55px;
+  height: 55px;
+  border: 1px solid #d5d5d5;
+}
+.gameon-board table {
+  overflow: auto;
+}
+.gameon-board .even {
+  background-color: #868686;
+  background: linear-gradient(to bottom, #6e6e6e 0%, #929292 100%);
+}
+.gameon-board .odd {
+  background-color: #b6b6b6;
+  background: linear-gradient(to top, #9f9f9f 0%, #b9b9b9 100%);
 }
 /*# sourceMappingURL=/static/css/style.css.map */

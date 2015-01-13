@@ -19,7 +19,7 @@ var mmochess = new (function () {
             var tiles = gameState.initialBoardTiles();
             gameState.board = new gameon.Board(level.width, level.height, tiles);
 
-            var $html = $(evutils.render('templates/shared/game.jinja2'));
+            var $html = $(evutils.render('static/templates/shared/game.jinja2'));
             gameState.board.render($html.find('.gameon-board'));
             gameState.destruct = function () {
                 gameon.cleanBoards();
@@ -37,56 +37,6 @@ var mmochess = new (function () {
             gameState.endHandler.render($html.find('.mm-end-condition'));
             gameState.$html = $html;
 
-            if (level.id == 1) {
-                window.setTimeout(function () {
-                    var $firstLevelFirstTile = $('#firstLevelFirstTile');
-                    $firstLevelFirstTile.popover('show');
-                }, 400);
-            }
-            if (level.id == 2) {
-                window.setTimeout(function () {
-                    var $firstPopup = $('#firstPopup');
-                    $firstPopup.popover('show');
-                }, 400);
-            }
-            if (level.id == 3) {
-                window.setTimeout(function () {
-                    var $canMoveIfClearPath = $('#canMoveIfClearPath');
-                    $canMoveIfClearPath.popover('show');
-                }, 400);
-            }
-            else if (level.id == 4) {
-                window.setTimeout(function () {
-                    var halfgrownTile = gameState.board.viewWhere(function (tile) {
-                        return tile.halfgrown;
-                    }).get(0).getRenderedTile();
-                    halfgrownTile.attr('data-toggle', 'popover');
-                    halfgrownTile.attr('data-placement', 'top');
-                    halfgrownTile.attr('data-trigger', 'manual');
-                    halfgrownTile.attr('data-content', 'Each turn letters grow onto the board. When the board fills up its game over!');
-                    halfgrownTile.popover('show');
-
-                    window.setTimeout(function () {
-                        halfgrownTile.popover('hide');
-                    }, 8000);
-                }, 400);
-            }
-            else if (level.id == 6) {
-                window.setTimeout(function () {
-                    var lockedTile = gameState.board.viewWhere(function (tile) {
-                        return tile.locked;
-                    }).get(0).getRenderedTile();
-                    lockedTile.attr('data-toggle', 'popover');
-                    lockedTile.attr('data-placement', 'top');
-                    lockedTile.attr('data-trigger', 'manual');
-                    lockedTile.attr('data-content', 'Break locks by getting a word nearby!');
-                    lockedTile.popover('show');
-
-                    window.setTimeout(function () {
-                        lockedTile.popover('hide');
-                    }, 7000);
-                }, 400);
-            }
 
             if (typeof GAMESAPI === 'object') {
                 GAMESAPI.beginGameSession(
@@ -111,8 +61,11 @@ var mmochess = new (function () {
 //                initPlayerAt(tiles, [2, 2], 1);
 //            }
             initPlayerAt(tiles, [2,2], 1);
-            initPlayerAt(tiles, [11,2], 2);
-            initPlayerAt(tiles, [2,11], 3);
+            initPlayerAt(tiles, [14,2], 2);
+            initPlayerAt(tiles, [2,14], 3);
+            initPlayerAt(tiles, [14,14], 4);
+            initPlayerAt(tiles, [26,14], 5);
+            initPlayerAt(tiles, [26,2], 6);
 
             return tiles;
         };
@@ -128,59 +81,59 @@ var mmochess = new (function () {
             tiles[y * level.width + x+6] = new MainTile("pawn", playerNum);
             tiles[y * level.width + x+7] = new MainTile("pawn", playerNum);
 
-            tiles[y+1 * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[y+2 * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[y+3 * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[y+4 * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[y+5 * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[y+6 * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[y+7 * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y+1) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y+2) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y+3) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y+4) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y+5) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y+6) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y+7) * level.width + x] = new MainTile("pawn", playerNum);
 
-            tiles[y+7 * level.width + x+1] = new MainTile("pawn", playerNum);
-            tiles[y+7 * level.width + x+2] = new MainTile("pawn", playerNum);
-            tiles[y+7 * level.width + x+3] = new MainTile("pawn", playerNum);
-            tiles[y+7 * level.width + x+4] = new MainTile("pawn", playerNum);
-            tiles[y+7 * level.width + x+5] = new MainTile("pawn", playerNum);
-            tiles[y+7 * level.width + x+6] = new MainTile("pawn", playerNum);
-            tiles[y+7 * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y+7) * level.width + x+1] = new MainTile("pawn", playerNum);
+            tiles[(y+7) * level.width + x+2] = new MainTile("pawn", playerNum);
+            tiles[(y+7) * level.width + x+3] = new MainTile("pawn", playerNum);
+            tiles[(y+7) * level.width + x+4] = new MainTile("pawn", playerNum);
+            tiles[(y+7) * level.width + x+5] = new MainTile("pawn", playerNum);
+            tiles[(y+7) * level.width + x+6] = new MainTile("pawn", playerNum);
+            tiles[(y+7) * level.width + x+7] = new MainTile("pawn", playerNum);
 
-            tiles[y+6 * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[y+5 * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[y+4 * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[y+3 * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[y+2 * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[y+1 * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y+6) * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y+5) * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y+4) * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y+3) * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y+2) * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y+1) * level.width + x+7] = new MainTile("pawn", playerNum);
 
-            tiles[y+1 * level.width + x+1] = new MainTile("castle", playerNum);
+            tiles[(y+1) * level.width + x+1] = new MainTile("castle", playerNum);
 
-            tiles[y+1 * level.width + x+2] = new MainTile("horse", playerNum);
-            tiles[y+2 * level.width + x+1] = new MainTile("horse", playerNum);
+            tiles[(y+1) * level.width + x+2] = new MainTile("horse", playerNum);
+            tiles[(y+2) * level.width + x+1] = new MainTile("horse", playerNum);
 
-            tiles[y+1 * level.width + x+3] = new MainTile("bishop", playerNum);
-            tiles[y+3 * level.width + x+1] = new MainTile("bishop", playerNum);
+            tiles[(y+1) * level.width + x+3] = new MainTile("bishop", playerNum);
+            tiles[(y+3) * level.width + x+1] = new MainTile("bishop", playerNum);
 
-            tiles[y+1 * level.width + x+4] = new MainTile("bishop", playerNum);
-            tiles[y+4 * level.width + x+1] = new MainTile("bishop", playerNum);
+            tiles[(y+1) * level.width + x+4] = new MainTile("bishop", playerNum);
+            tiles[(y+4) * level.width + x+1] = new MainTile("bishop", playerNum);
 
-            tiles[y+1 * level.width + x+5] = new MainTile("horse", playerNum);
-            tiles[y+5 * level.width + x+1] = new MainTile("horse", playerNum);
+            tiles[(y+1) * level.width + x+5] = new MainTile("horse", playerNum);
+            tiles[(y+5) * level.width + x+1] = new MainTile("horse", playerNum);
 
-            tiles[y+1 * level.width + x+6] = new MainTile("castle", playerNum);
-            tiles[y+6 * level.width + x+1] = new MainTile("castle", playerNum);
+            tiles[(y+1) * level.width + x+6] = new MainTile("castle", playerNum);
+            tiles[(y+6) * level.width + x+1] = new MainTile("castle", playerNum);
 
-            tiles[y+2 * level.width + x + 6] = new MainTile("horse", playerNum);
-            tiles[y+6 * level.width + x + 2] = new MainTile("horse", playerNum);
+            tiles[(y+2) * level.width + x + 6] = new MainTile("horse", playerNum);
+            tiles[(y+6) * level.width + x + 2] = new MainTile("horse", playerNum);
 
-            tiles[y+3 * level.width + x + 6] = new MainTile("bishop", playerNum);
-            tiles[y+6 * level.width + x + 3] = new MainTile("bishop", playerNum);
+            tiles[(y+3) * level.width + x + 6] = new MainTile("bishop", playerNum);
+            tiles[(y+6) * level.width + x + 3] = new MainTile("bishop", playerNum);
 
-            tiles[y+4 * level.width + x + 6] = new MainTile("bishop", playerNum);
-            tiles[y+6 * level.width + x + 4] = new MainTile("bishop", playerNum);
+            tiles[(y+4) * level.width + x + 6] = new MainTile("bishop", playerNum);
+            tiles[(y+6) * level.width + x + 4] = new MainTile("bishop", playerNum);
 
-            tiles[y + 5 * level.width + x + 6] = new MainTile("horse", playerNum);
-            tiles[y + 6 * level.width + x + 5] = new MainTile("horse", playerNum);
+            tiles[(y + 5) * level.width + x + 6] = new MainTile("horse", playerNum);
+            tiles[(y + 6) * level.width + x + 5] = new MainTile("horse", playerNum);
 
-            tiles[y + 6 * level.width + x + 6] = new MainTile("castle", playerNum);
+            tiles[(y + 6) * level.width + x + 6] = new MainTile("castle", playerNum);
         }
 
         gameState.currentSelected = null;
