@@ -1,4 +1,4 @@
-application: mmochess
+application: bigmultiplayerchess
 version: 1
 runtime: python27
 api_version: 1
@@ -44,6 +44,7 @@ handlers:
 - url: /BingSiteAuth.xml
   static_files: static/BingSiteAuth.xml
   upload: static/BingSiteAuth.xml
+
 - url: /channel.html
   static_files: static/channel.html
   upload: static/channel.html
