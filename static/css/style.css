@@ -305,9 +305,13 @@ body {
   background-color: inherit;
   border: 0 solid white;
   padding: 0;
+  text-shadow: 0 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
 }
 .chess-piece--player-1 {
   color: #e6e6e6;
+}
+.chess-piece--player-2 {
+  text-shadow: 0 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
 .chess-piece--player-3 {
   color: #391ee2;
