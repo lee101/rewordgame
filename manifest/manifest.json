@@ -5,10 +5,10 @@
     "manifest_version": 2,
     "app": {
         "urls": [
-            "*://www.wordsmashing.com/"
+            "*://bigmultiplayerchess.com/"
         ],
         "launch": {
-            "web_url": "http://www.wordsmashing.com/"
+            "web_url": "http://bigmultiplayerchess.com/"
         }
     },
     "icons": {
@@ -19,6 +19,6 @@
     "fullscreen": "true",
     "developer": {
         "name": "Big Multiplayer Chess",
-        "url": "http://www.wordsmashing.com"
+        "url": "http://bigmultiplayerchess.com"
     }
 }

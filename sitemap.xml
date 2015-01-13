@@ -1,58 +1,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>http://www.wordsmashing.com</loc>
+		<loc>{{ host_url }}</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
 	</url>
 	<url>
-		<loc>http://www.wordsmashing.com/versus</loc>
+		<loc>{{ host_url }}/play</loc>
 		<changefreq>weekly</changefreq>
 		<priority>1</priority>
 	</url>
 	<url>
-		<loc>http://www.wordsmashing.com/versus/1player</loc>
-		<changefreq>weekly</changefreq>
-		<priority>1</priority>
-	</url>
-	<url>
-		<loc>http://www.wordsmashing.com/versus/2player</loc>
-		<changefreq>weekly</changefreq>
-		<priority>1</priority>
-	</url>
-	<url>
-		<loc>http://www.wordsmashing.com/campaign</loc>
-		<changefreq>weekly</changefreq>
-		<priority>1</priority>
-	</url>
-	<url>
-		<loc>http://www.wordsmashing.com/learn-english</loc>
-		<changefreq>weekly</changefreq>
-		<priority>1</priority>
-	</url>
-	{% for key, level in learnenglishlevels.iteritems() %}
-	<url>
-		<loc>http://www.wordsmashing.com/learn-english/{{ key }}</loc>
-		<changefreq>weekly</changefreq>
-		<priority>0.8</priority>
-	</url>
-	{% endfor %}
-	<url>
-		<loc>http://www.wordsmashing.com/about</loc>
+		<loc>{{ host_url }}/about</loc>
 		<changefreq>weekly</changefreq>
 		<priority>0.1</priority>
 	</url>
 	<url>
-		<loc>http://www.wordsmashing.com/terms</loc>
+		<loc>{{ host_url }}/terms</loc>
 		<changefreq>weekly</changefreq>
 		<priority>0</priority>
 	</url>
 	<url>
-		<loc>http://www.wordsmashing.com/privacy</loc>
+		<loc>{{ host_url }}/privacy</loc>
 		<changefreq>weekly</changefreq>
 		<priority>0</priority>
 	</url>
 	<url>
-		<loc>http://www.wordsmashing.com/contact</loc>
+		<loc>{{ host_url }}/contact</loc>
 		<changefreq>weekly</changefreq>
 		<priority>0</priority>
 	</url>
