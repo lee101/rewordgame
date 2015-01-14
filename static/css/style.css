@@ -313,6 +313,9 @@ body {
 .chess-piece--player-2 {
   text-shadow: 0 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
+.chess-piece--selected {
+  text-shadow: 0 0 #ffd700, 1px -1px 0 #ffd700, -1px 1px 0 #ffd700, 1px 1px 0 #ffd700;
+}
 .chess-piece--player-3 {
   color: #391ee2;
 }

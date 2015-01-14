@@ -134,6 +134,9 @@ var mmochess = new (function () {
             tiles[(y + 6) * level.width + x + 5] = new MainTile("horse", playerNum);
 
             tiles[(y + 6) * level.width + x + 6] = new MainTile("castle", playerNum);
+
+            tiles[(y + 3) * level.width + x + 3] = new MainTile("queen", playerNum);
+            tiles[(y + 4) * level.width + x + 4] = new MainTile("king", playerNum);
         }
 
         gameState.currentSelected = null;
@@ -177,8 +180,43 @@ var mmochess = new (function () {
             };
         };
 
-        var MainTile = function (type, playerNum) {
+        var MainTile = function (type, playerNum, halfgrown) {
             var self = new EmptyTile();
+            if (typeof halfgrown == 'undefined') {
+                halfgrown = false;
+            }
+
+            self.setHalfgrown = function (halfgrown) {
+                self.halfgrown = halfgrown;
+                self.canPassThrough = halfgrown;
+                if (!self.halfgrown) {
+                    self.oldClick = self.click;
+                    self.click = function () {
+                        var canClick = (self.playerNum == gameState.players_turn);
+                        if (!canClick) {
+                            return;
+                        }
+                        if (!self.selected) {
+                            gameState.unselectAll();
+                            self.selected = true;
+                            gameState.currentSelected = self;
+                        }
+                        else {
+                            gameState.currentSelected = null;
+                            self.selected = false;
+                        }
+                        self.reRender();
+                    };
+                }
+                else {
+                    if (self.oldClick) {
+                        self.click = self.oldClick;
+                    }
+                }
+            };
+
+            self.setHalfgrown(halfgrown);
+
 
             self.type = type;
             self.points = 0;
@@ -189,11 +227,15 @@ var mmochess = new (function () {
             self.selected = false;
 
             self.render = function () {
+                var selectedClass = '';
+                if (self.selected) {
+                    selectedClass = ' chess-piece--selected';
+                }
                 var pieceText = fixtures.pieces[type];
                 if (self.playerNum === 1) {
                     pieceText = fixtures.whitePieces[type];
                 }
-                return '<button type="button" class="chess-piece chess-piece--player-'+playerNum+'">' + pieceText +
+                return '<button type="button" class="chess-piece chess-piece--player-'+playerNum+ selectedClass + '">' + pieceText +
                     '</button>';
             };
             return self;
