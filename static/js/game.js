@@ -13,7 +13,7 @@ var mmochess = new (function () {
 
         function construct() {
             gameon.pauseAll();
-            gameon.loopSound("theme");
+//            gameon.loopSound("theme");
 
             gameState.players_turn = 1;
             var tiles = gameState.initialBoardTiles();
@@ -23,7 +23,7 @@ var mmochess = new (function () {
             gameState.board.render($html.find('.gameon-board'));
             gameState.destruct = function () {
                 gameon.cleanBoards();
-                gameon.pauseSound("theme");
+//                gameon.pauseSound("theme");
             };
 
             if (level.computer_opponent) {
@@ -31,7 +31,7 @@ var mmochess = new (function () {
             }
 
 
-            gameon.renderVolumeTo($html.find('.mm-volume'));
+//            gameon.renderVolumeTo($html.find('.mm-volume'));
 
             gameState.endHandler = new gameState.EndHandler();
             gameState.endHandler.render($html.find('.mm-end-condition'));
@@ -60,12 +60,12 @@ var mmochess = new (function () {
 //            for (var i = 0; i < level.num_players; i++) {
 //                initPlayerAt(tiles, [2, 2], 1);
 //            }
-            initPlayerAt(tiles, [2,2], 1);
-            initPlayerAt(tiles, [14,2], 2);
-            initPlayerAt(tiles, [2,14], 3);
-            initPlayerAt(tiles, [14,14], 4);
-            initPlayerAt(tiles, [26,14], 5);
-            initPlayerAt(tiles, [26,2], 6);
+            initPlayerAt(tiles, [2, 2], 1);
+            initPlayerAt(tiles, [14, 2], 2);
+            initPlayerAt(tiles, [2, 14], 3);
+            initPlayerAt(tiles, [14, 14], 4);
+            initPlayerAt(tiles, [26, 14], 5);
+            initPlayerAt(tiles, [26, 2], 6);
 
             return tiles;
         };
@@ -73,62 +73,62 @@ var mmochess = new (function () {
             var y = yxPos[0];
             var x = yxPos[1];
             tiles[y * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[y * level.width + x+1] = new MainTile("pawn", playerNum);
-            tiles[y * level.width + x+2] = new MainTile("pawn", playerNum);
-            tiles[y * level.width + x+3] = new MainTile("pawn", playerNum);
-            tiles[y * level.width + x+4] = new MainTile("pawn", playerNum);
-            tiles[y * level.width + x+5] = new MainTile("pawn", playerNum);
-            tiles[y * level.width + x+6] = new MainTile("pawn", playerNum);
-            tiles[y * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[y * level.width + x + 1] = new MainTile("pawn", playerNum);
+            tiles[y * level.width + x + 2] = new MainTile("pawn", playerNum);
+            tiles[y * level.width + x + 3] = new MainTile("pawn", playerNum);
+            tiles[y * level.width + x + 4] = new MainTile("pawn", playerNum);
+            tiles[y * level.width + x + 5] = new MainTile("pawn", playerNum);
+            tiles[y * level.width + x + 6] = new MainTile("pawn", playerNum);
+            tiles[y * level.width + x + 7] = new MainTile("pawn", playerNum);
 
-            tiles[(y+1) * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[(y+2) * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[(y+3) * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[(y+4) * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[(y+5) * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[(y+6) * level.width + x] = new MainTile("pawn", playerNum);
-            tiles[(y+7) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y + 1) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y + 2) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y + 3) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y + 4) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y + 5) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y + 6) * level.width + x] = new MainTile("pawn", playerNum);
+            tiles[(y + 7) * level.width + x] = new MainTile("pawn", playerNum);
 
-            tiles[(y+7) * level.width + x+1] = new MainTile("pawn", playerNum);
-            tiles[(y+7) * level.width + x+2] = new MainTile("pawn", playerNum);
-            tiles[(y+7) * level.width + x+3] = new MainTile("pawn", playerNum);
-            tiles[(y+7) * level.width + x+4] = new MainTile("pawn", playerNum);
-            tiles[(y+7) * level.width + x+5] = new MainTile("pawn", playerNum);
-            tiles[(y+7) * level.width + x+6] = new MainTile("pawn", playerNum);
-            tiles[(y+7) * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y + 7) * level.width + x + 1] = new MainTile("pawn", playerNum);
+            tiles[(y + 7) * level.width + x + 2] = new MainTile("pawn", playerNum);
+            tiles[(y + 7) * level.width + x + 3] = new MainTile("pawn", playerNum);
+            tiles[(y + 7) * level.width + x + 4] = new MainTile("pawn", playerNum);
+            tiles[(y + 7) * level.width + x + 5] = new MainTile("pawn", playerNum);
+            tiles[(y + 7) * level.width + x + 6] = new MainTile("pawn", playerNum);
+            tiles[(y + 7) * level.width + x + 7] = new MainTile("pawn", playerNum);
 
-            tiles[(y+6) * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[(y+5) * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[(y+4) * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[(y+3) * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[(y+2) * level.width + x+7] = new MainTile("pawn", playerNum);
-            tiles[(y+1) * level.width + x+7] = new MainTile("pawn", playerNum);
+            tiles[(y + 6) * level.width + x + 7] = new MainTile("pawn", playerNum);
+            tiles[(y + 5) * level.width + x + 7] = new MainTile("pawn", playerNum);
+            tiles[(y + 4) * level.width + x + 7] = new MainTile("pawn", playerNum);
+            tiles[(y + 3) * level.width + x + 7] = new MainTile("pawn", playerNum);
+            tiles[(y + 2) * level.width + x + 7] = new MainTile("pawn", playerNum);
+            tiles[(y + 1) * level.width + x + 7] = new MainTile("pawn", playerNum);
 
-            tiles[(y+1) * level.width + x+1] = new MainTile("castle", playerNum);
+            tiles[(y + 1) * level.width + x + 1] = new MainTile("castle", playerNum);
 
-            tiles[(y+1) * level.width + x+2] = new MainTile("horse", playerNum);
-            tiles[(y+2) * level.width + x+1] = new MainTile("horse", playerNum);
+            tiles[(y + 1) * level.width + x + 2] = new MainTile("horse", playerNum);
+            tiles[(y + 2) * level.width + x + 1] = new MainTile("horse", playerNum);
 
-            tiles[(y+1) * level.width + x+3] = new MainTile("bishop", playerNum);
-            tiles[(y+3) * level.width + x+1] = new MainTile("bishop", playerNum);
+            tiles[(y + 1) * level.width + x + 3] = new MainTile("bishop", playerNum);
+            tiles[(y + 3) * level.width + x + 1] = new MainTile("bishop", playerNum);
 
-            tiles[(y+1) * level.width + x+4] = new MainTile("bishop", playerNum);
-            tiles[(y+4) * level.width + x+1] = new MainTile("bishop", playerNum);
+            tiles[(y + 1) * level.width + x + 4] = new MainTile("bishop", playerNum);
+            tiles[(y + 4) * level.width + x + 1] = new MainTile("bishop", playerNum);
 
-            tiles[(y+1) * level.width + x+5] = new MainTile("horse", playerNum);
-            tiles[(y+5) * level.width + x+1] = new MainTile("horse", playerNum);
+            tiles[(y + 1) * level.width + x + 5] = new MainTile("horse", playerNum);
+            tiles[(y + 5) * level.width + x + 1] = new MainTile("horse", playerNum);
 
-            tiles[(y+1) * level.width + x+6] = new MainTile("castle", playerNum);
-            tiles[(y+6) * level.width + x+1] = new MainTile("castle", playerNum);
+            tiles[(y + 1) * level.width + x + 6] = new MainTile("castle", playerNum);
+            tiles[(y + 6) * level.width + x + 1] = new MainTile("castle", playerNum);
 
-            tiles[(y+2) * level.width + x + 6] = new MainTile("horse", playerNum);
-            tiles[(y+6) * level.width + x + 2] = new MainTile("horse", playerNum);
+            tiles[(y + 2) * level.width + x + 6] = new MainTile("horse", playerNum);
+            tiles[(y + 6) * level.width + x + 2] = new MainTile("horse", playerNum);
 
-            tiles[(y+3) * level.width + x + 6] = new MainTile("bishop", playerNum);
-            tiles[(y+6) * level.width + x + 3] = new MainTile("bishop", playerNum);
+            tiles[(y + 3) * level.width + x + 6] = new MainTile("bishop", playerNum);
+            tiles[(y + 6) * level.width + x + 3] = new MainTile("bishop", playerNum);
 
-            tiles[(y+4) * level.width + x + 6] = new MainTile("bishop", playerNum);
-            tiles[(y+6) * level.width + x + 4] = new MainTile("bishop", playerNum);
+            tiles[(y + 4) * level.width + x + 6] = new MainTile("bishop", playerNum);
+            tiles[(y + 6) * level.width + x + 4] = new MainTile("bishop", playerNum);
 
             tiles[(y + 5) * level.width + x + 6] = new MainTile("horse", playerNum);
             tiles[(y + 6) * level.width + x + 5] = new MainTile("horse", playerNum);
@@ -158,20 +158,28 @@ var mmochess = new (function () {
             self.canPassThrough = true;
 
             self.click = function () {
-                //moveto this
-                var path = gameState.board.getPathFromTo(gameState.currentSelected, self);
-                if (path) {
-                    var animationSpeed = 200;
-                    if (gameState.players_turn != 1 && level.computer_opponent) {
-                        animationSpeed = 400;
+                if (!gameState.currentSelected) {
+                    return;
+                }
+                var moves = gameState.currentSelected.getAllowedMoves();
+                if (_.contains(moves, [self.yPos, self.xPos])) {//TODO contains doesnt work
+                    //moveto this
+                    var path = gameState.board.getPathFromTo(gameState.currentSelected, self);
+                    if (path) {
+                        var animationSpeed = 200;
+                        if (gameState.players_turn != 1 && level.computer_opponent) {
+                            animationSpeed = 400;
+                        }
+//                        gameon.unmuteSound('moving');
+//                        gameon.playSound('moving');
+
+                        //start ai search ASAP
+                        gameState.board.animateTileAlongPath(gameState.currentSelected, path, animationSpeed, function () {
+                            gameState.endHandler.turnEnd(self, gameState.currentSelected);
+//                            gameon.muteSound('moving');
+//                            gameon.pauseSound('moving');
+                        });
                     }
-                    gameon.unmuteSound('moving');
-                    gameon.playSound('moving');
-                    gameState.board.animateTileAlongPath(gameState.currentSelected, path, animationSpeed, function () {
-                        gameState.endHandler.turnEnd(self, gameState.currentSelected);
-                        gameon.muteSound('moving');
-                        gameon.pauseSound('moving');
-                    });
                 }
             };
 
@@ -196,14 +204,27 @@ var mmochess = new (function () {
                         if (!canClick) {
                             return;
                         }
+                        function clearHighlighting() {
+                            $.each(gameState.board.tiles, function (i, tile) {
+                                tile.getRenderedCell().removeClass('ws-cell-highlight');
+                            })
+                        }
+
                         if (!self.selected) {
                             gameState.unselectAll();
                             self.selected = true;
                             gameState.currentSelected = self;
+
+                            clearHighlighting();
+                            var allowedMoves = gameState.currentSelected.getAllowedMoves();
+                            $.each(allowedMoves, function (i, move) {
+                                move.getRenderedCell().addClass('ws-cell-highlight');
+                            })
                         }
                         else {
                             gameState.currentSelected = null;
                             self.selected = false;
+                            clearHighlighting();
                         }
                         self.reRender();
                     };
@@ -222,20 +243,181 @@ var mmochess = new (function () {
             self.points = 0;
             self.playerNum = playerNum;
 
-
-
             self.selected = false;
+
+            self.getAllowedMoves = function () {
+                function validateMoves(positions) {
+                    return _.map(_.filter(positions, function (position) {
+                        return gameState.board.isInBoard(position[0], position[1]) &&
+                            gameState.board.getTile(position[0], position[1]).playerNum != gameState.players_turn;
+                    }), function (move) {
+                        return gameState.board.getTile(move[0], move[1]);
+                    });
+                }
+
+                function addDiag(y, x) {
+                    if (gameState.board.isInBoard(y, x) &&
+                        gameState.board.getTile(y, x).playerNum &&
+                        gameState.board.getTile(y, x).playerNum != gameState.players_turn) {
+                        allowedMoves.push([y, x])
+                    }
+                }
+
+                var allowedMoves = [];
+                if (self.type == "pawn") {
+                    allowedMoves = [
+                        [self.yPos + 1, self.xPos],
+                        [self.yPos, self.xPos + 1],
+                        [self.yPos - 1, self.xPos ],
+                        [self.yPos, self.xPos - 1]
+                    ];
+                    addDiag(self.yPos + 1, self.xPos + 1);
+                    addDiag(self.yPos - 1, self.xPos + 1);
+                    addDiag(self.yPos + 1, self.xPos - 1);
+                    addDiag(self.yPos - 1, self.xPos - 1);
+                }
+                if (self.type == "horse") {
+                    allowedMoves = [
+                        [self.yPos + 2, self.xPos + 1],
+                        [self.yPos + 2, self.xPos - 1],
+                        [self.yPos - 2, self.xPos + 1],
+                        [self.yPos - 2, self.xPos - 1],
+                        [self.yPos + 1, self.xPos + 2],
+                        [self.yPos + 1, self.xPos - 2],
+                        [self.yPos - 1, self.xPos + 2],
+                        [self.yPos - 1, self.xPos - 2]
+                    ];
+                }
+                if (self.type == "bishop" || self.type == "queen") {
+                    for (var i = 1; i < 8; i++) {
+                        var move = [self.yPos + i, self.xPos + i];
+                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            allowedMoves.push(move);
+                            break;
+                        }
+                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                            break;
+                        }
+                        else {
+                            allowedMoves.push(move);
+                        }
+                    }
+                    for (var i = 1; i < 8; i++) {
+                        var move = [self.yPos - i, self.xPos + i];
+                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            allowedMoves.push(move);
+                            break;
+                        }
+                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                            break;
+                        }
+                        else {
+                            allowedMoves.push(move);
+                        }
+                    }
+                    for (var i = 1; i < 8; i++) {
+                        var move = [self.yPos + i, self.xPos - i];
+                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            allowedMoves.push(move);
+                            break;
+                        }
+                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                            break;
+                        }
+                        else {
+                            allowedMoves.push(move);
+                        }
+                    }
+                    for (var i = 1; i < 8; i++) {
+                        var move = [self.yPos - i, self.xPos - i];
+                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            allowedMoves.push(move);
+                            break;
+                        }
+                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                            break;
+                        }
+                        else {
+                            allowedMoves.push(move);
+                        }
+                    }
+                }
+                if (self.type == "castle" || self.type == "queen") {
+                    for (var i = 1; i < 8; i++) {
+                        var move = [self.yPos + i, self.xPos];
+                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            allowedMoves.push(move);
+                            break;
+                        }
+                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                            break;
+                        }
+                        else {
+                            allowedMoves.push(move);
+                        }
+                    }
+                    for (var i = 1; i < 8; i++) {
+                        var move = [self.yPos - i, self.xPos];
+                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            allowedMoves.push(move);
+                            break;
+                        }
+                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                            break;
+                        }
+                        else {
+                            allowedMoves.push(move);
+                        }
+                    }
+                    for (var i = 1; i < 8; i++) {
+                        var move = [self.yPos, self.xPos + i];
+                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            allowedMoves.push(move);
+                            break;
+                        }
+                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                            break;
+                        }
+                        else {
+                            allowedMoves.push(move);
+                        }
+                    }
+                    for (var i = 1; i < 8; i++) {
+                        var move = [self.yPos, self.xPos - i];
+                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            allowedMoves.push(move);
+                            break;
+                        }
+                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                            break;
+                        }
+                        else {
+                            allowedMoves.push(move);
+                        }
+                    }
+                }
+                return validateMoves(allowedMoves);
+
+            };
 
             self.render = function () {
                 var selectedClass = '';
                 if (self.selected) {
                     selectedClass = ' chess-piece--selected';
                 }
-                var pieceText = fixtures.pieces[type];
+                var pieceText = fixtures.pieces[self.type];
                 if (self.playerNum === 1) {
-                    pieceText = fixtures.whitePieces[type];
+                    pieceText = fixtures.whitePieces[self.type];
                 }
-                return '<button type="button" class="chess-piece chess-piece--player-'+playerNum+ selectedClass + '">' + pieceText +
+                return '<button type="button" class="chess-piece chess-piece--player-' + self.playerNum + selectedClass + '">' + pieceText +
                     '</button>';
             };
             return self;
@@ -270,7 +452,7 @@ var mmochess = new (function () {
                 //figure out if endtile should be removed(ifpiece is taken)
                 gameState.board.swapTiles(startTile, endTile);
 
-                //
+                //TODO
 
                 gameon.shuffle(growers);
                 //place them

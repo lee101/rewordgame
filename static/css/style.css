@@ -346,4 +346,12 @@ body {
   background-color: #b6b6b6;
   background: linear-gradient(to top, #9f9f9f 0%, #b9b9b9 100%);
 }
+.ws-cell-highlight.odd {
+  background-color: #3fb63e;
+  background: linear-gradient(to top, #3c9f3f 0%, #45b94d 100%);
+}
+.ws-cell-highlight.even {
+  background-color: #38863f;
+  background: linear-gradient(to bottom, #2a6e2c 0%, #36923f 100%);
+}
 /*# sourceMappingURL=/static/css/style.css.map */
