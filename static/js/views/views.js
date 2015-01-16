@@ -7,7 +7,7 @@
         },
 
         render: function () {
-            this.$el.html(evutils.render('templates/shared/start.jinja2'));
+            this.$el.html(evutils.render('static/templates/shared/start.jinja2'));
 
             return this;
         }
@@ -44,7 +44,7 @@
 
             var self = this;
 
-            var $html = $(evutils.render('templates/shared/done-level.jinja2'));
+            var $html = $(evutils.render('static/templates/shared/done-level.jinja2'));
             self.$el.html($html);
 
             $html.find('#mm-replay').click(function () {
@@ -123,7 +123,7 @@
         },
 
         render: function () {
-            this.$el.html(evutils.render('templates/shared/versus.jinja2'));
+            this.$el.html(evutils.render('static/templates/shared/versus.jinja2'));
             return this;
         }
     });
@@ -195,7 +195,7 @@
         },
 
         render: function () {
-            this.$el.html(evutils.render('templates/shared/contact.jinja2'));
+            this.$el.html(evutils.render('static/templates/shared/contact.jinja2'));
             return this;
         }
     });
