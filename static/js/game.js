@@ -162,7 +162,10 @@ var mmochess = new (function () {
                     return;
                 }
                 var moves = gameState.currentSelected.getAllowedMoves();
-                if (_.contains(moves, [self.yPos, self.xPos])) {//TODO contains doesnt work
+                var isValidMove = _.any(moves, function (move) {
+                    return move.yPos == self.yPos && move.xPos == self.xPos;
+                });
+                if (isValidMove) {
                     //moveto this
                     var path = gameState.board.getPathFromTo(gameState.currentSelected, self);
                     if (path) {
@@ -173,7 +176,7 @@ var mmochess = new (function () {
 //                        gameon.unmuteSound('moving');
 //                        gameon.playSound('moving');
 
-                        //start ai search ASAP
+                        //TODO start ai search ASAP
                         gameState.board.animateTileAlongPath(gameState.currentSelected, path, animationSpeed, function () {
                             gameState.endHandler.turnEnd(self, gameState.currentSelected);
 //                            gameon.muteSound('moving');
@@ -453,30 +456,11 @@ var mmochess = new (function () {
                 gameState.board.swapTiles(startTile, endTile);
 
                 //TODO
+                gameState.players_turn = gameState.players_turn++ % level.num_players + 1;
 
-                gameon.shuffle(growers);
-                //place them
-                var currpos = 0;
-                for (var y = 0; y < level.height; y++) {
-                    for (var x = 0; x < level.width; x++) {
-
-                        if (!gameState.board.getTile(y, x).letter && !gameState.board.getTile(y, x).blocked) {
-                            if (growers[currpos].letter) {
-                                gameState.board.setTile(y, x, growers[currpos])
-                            }
-                            currpos++
-                        }
-                    }
-                }
-                if (level.is_multiplayer) {
-                    if (gameState.players_turn == 1) {
-                        gameState.players_turn = 2;
-                        if (level.computer_opponent) {
-                            gameState.aiHandler.makeAiMove();
-                        }
-                    }
-                    else {
-                        gameState.players_turn = 1;
+                if (gameState.players_turn != 1) {
+                    if (level.computer_opponent) {
+                        gameState.aiHandler.makeAiMove();
                     }
                 }
 
@@ -531,35 +515,21 @@ var mmochess = new (function () {
 
                 //find a place to move to
                 // - find all blue movables
-                var blueTiles = [];
+                var ourPieces = [];
+                var totalNumMovesFound = 0;
+
                 for (var y = 0; y < level.height; y++) {
                     for (var x = 0; x < level.width; x++) {
                         var currentTile = gameState.board.getTile(y, x);
-                        if (currentTile.isRed == false &&
-                            currentTile.letter && !currentTile.halfgrown) {
+                        if (currentTile.playerNum == gameState.players_turn) {
+                            var allowedMoves = currentTile.getAllowedMoves();
+                            totalNumMovesFound += allowedMoves.length
+                            ourPieces.push([currentTile, allowedMoves]);
+                        }
+                    }
+                }
 
-                            blueTiles.push(currentTile);
-                        }
-                    }
-                }
-                //get the move with best score
-                var maxScoreMove = [
-                    gameState.board.getTile(0, 0),
-                    gameState.board.getTile(0, 0)
-                ];
-                var maxScore = 0;
-                var totalNumMovesFound = 0;
-                for (var i = 0; i < blueTiles.length; i++) {
-                    var allMovesFrom = gameState.board.getAllReachableTilesFrom(blueTiles[i]);
-                    totalNumMovesFound += allMovesFrom.length;
-                    for (var j = 0; j < allMovesFrom.length; j++) {
-                        var currentMovesScore = gameState.endHandler.scoreMove(blueTiles[i], allMovesFrom[j]);
-                        if (currentMovesScore >= maxScore) {
-                            maxScore = currentMovesScore;
-                            maxScoreMove = [blueTiles[i], allMovesFrom[j]];
-                        }
-                    }
-                }
+                var maxScoreMove = [ourPieces[0][0], ourPieces[0][1][0]];
                 if (totalNumMovesFound == 0) {
                     //no moves! TODO something
                     gameState.endHandler.gameOver();
