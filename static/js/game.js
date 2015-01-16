@@ -197,15 +197,16 @@ var mmochess = new (function () {
                 halfgrown = false;
             }
 
+            self.canPassThrough = true;
+
             self.setHalfgrown = function (halfgrown) {
                 self.halfgrown = halfgrown;
-                self.canPassThrough = halfgrown;
                 if (!self.halfgrown) {
                     self.oldClick = self.click;
                     self.click = function () {
                         var canClick = (self.playerNum == gameState.players_turn);
                         if (!canClick) {
-                            return;
+                            return self.oldClick();
                         }
                         function clearHighlighting() {
                             $.each(gameState.board.tiles, function (i, tile) {
@@ -453,6 +454,8 @@ var mmochess = new (function () {
 
             endSelf.turnEnd = function (startTile, endTile) {
                 //figure out if endtile should be removed(ifpiece is taken)
+                gameState.board.setTile(endTile.yPos, endTile.xPos, new EmptyTile());
+
                 gameState.board.swapTiles(startTile, endTile);
 
                 //TODO
