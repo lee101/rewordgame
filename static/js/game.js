@@ -178,7 +178,7 @@ var mmochess = new (function () {
 
                         //TODO start ai search ASAP
                         gameState.board.animateTileAlongPath(gameState.currentSelected, path, animationSpeed, function () {
-                            gameState.endHandler.turnEnd(self, gameState.currentSelected);
+                            gameState.endHandler.turnEnd(gameState.currentSelected, self);
 //                            gameon.muteSound('moving');
 //                            gameon.pauseSound('moving');
                         });
@@ -458,7 +458,6 @@ var mmochess = new (function () {
 
                 gameState.board.swapTiles(startTile, endTile);
 
-                //TODO
                 gameState.players_turn = gameState.players_turn++ % level.num_players + 1;
 
                 if (gameState.players_turn != 1) {
@@ -469,28 +468,12 @@ var mmochess = new (function () {
 
                 gameState.board.render();
             };
-            endSelf.scoreMove = function (startTile, endTile) {
-            };
 
 
             endSelf.gameOver = function () {
-                if ($.isNumeric(level.id)) {
-                    gameon.getUser(function (user) {
-                        user.saveScore(level.id, gameState.starBar.getScore());
-                        if (gameState.starBar.hasWon()) {
-                            if (user.levels_unlocked < level.id) {
-                                user.saveLevelsUnlocked(level.id);
-                                var numLevels = fixtures.getLevelsByDifficulty(level.difficulty).length;
-                                if (user.levels_unlocked % numLevels === 0) {
-                                    user.saveDifficultiesUnlocked(user.difficulties_unlocked + 1);
-                                }
-                            }
-                        }
-                    });
-                }
 
                 gameState.destruct();
-                APP.doneLevel(gameState.starBar, gameState.starBar2, level);
+                APP.doneLevel(level);
                 if (typeof GAMESAPI === 'object') {
                     GAMESAPI.postScore(gameState.starBar.getScore(), function () {
                     }, function () {
@@ -511,14 +494,111 @@ var mmochess = new (function () {
 
         gameState.AIHandler = function () {
             var AISelf = {};
+            //hatred based on distance/total scores todo recalculate
+            // full hate = numplayers-1, no hate = 0
+            AISelf.hatredMatrix = {
+                2: {
+                    1:1.1,
+                    3:1.1,
+                    4:1.1,
+                    5:0.9,
+                    6:0.9
+                },
+                3: {
+                    1: 1,
+                    2: 1,
+                    4: 1,
+                    5: 1,
+                    6: 1
+                },
+                4: {
+                    1: 0.9,
+                    2: 1,
+                    3: 1.1,
+                    5: 1.1,
+                    6: 0.9
+                },
+                5: {
+                    1: 0.9,
+                    2: 1,
+                    3: 1.1,
+                    4: 1.1,
+                    6: 0.9
+                },
+                6: {
+                    1: 0.9,
+                    2: 0.9,
+                    3: 1,
+                    4: 1.1,
+                    5: 1.1
+                }
+            };
+
+            AISelf.boardScore = 0;
+            AISelf.scoreBoard = function () {
+                var playersPower = {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0,
+                    6: 0
+                };
+                var playersPieces = {
+                    1: [],
+                    2: [],
+                    3: [],
+                    4: [],
+                    5: [],
+                    6: []
+                };
+
+
+                for (var y = 0; y < level.height; y++) {
+                    for (var x = 0; x < level.width; x++) {
+                        var currentTile = gameState.board.getTile(y, x);
+                        if (currentTile.playerNum) {
+                            playersPieces[currentTile.playerNum].push(currentTile);
+                            playersPower[currentTile.playerNum] += fixtures.piecesPower[currentTile.type]
+                        }
+                    }
+                }
+
+                var boardsScore = 0;
+                for (var playerNum = 0; playerNum < level.num_players; playerNum++) {
+                    if (playerNum == gameState.players_turn) {
+                        boardsScore += playersPower[playerNum];
+                    }
+                    else {
+                        boardsScore -= playersPower[playerNum] / (level.num_players-1) *
+                            AISelf.hatredMatrix[gameState.players_turn][playerNum];
+                    }
+                }
+
+                return boardsScore;
+            };
+
+            AISelf.scoreMove = function (startTile, endTile) {
+
+                //simulate move
+                var oldStartTilePos = [startTile.yPos, startTile.xPos];
+                gameState.board.swapTiles(startTile, endTile);
+                gameState.board.setTile(startTile.yPos, startTile.xPos, new EmptyTile());
+
+                var boardScore = AISelf.scoreBoard();
+
+                //rollback board state
+                gameState.board.setTile(startTile.yPos, startTile.xPos, endTile);//alters the endtile
+                gameState.board.swapTiles(startTile, oldStartTilePos);
+
+                return boardScore;
+            };
+
 
             AISelf.makeAiMove = function () {
-                //TODO figure out if people can move!
                 gameon.blockUI();
 
-                //find a place to move to
-                // - find all blue movables
-                var ourPieces = [];
+                AISelf.ourPieces = [];
                 var totalNumMovesFound = 0;
 
                 for (var y = 0; y < level.height; y++) {
@@ -526,15 +606,30 @@ var mmochess = new (function () {
                         var currentTile = gameState.board.getTile(y, x);
                         if (currentTile.playerNum == gameState.players_turn) {
                             var allowedMoves = currentTile.getAllowedMoves();
-                            totalNumMovesFound += allowedMoves.length
-                            ourPieces.push([currentTile, allowedMoves]);
+                            totalNumMovesFound += allowedMoves.length;
+                            AISelf.ourPieces.push([currentTile, allowedMoves]);
                         }
                     }
                 }
 
-                var maxScoreMove = [ourPieces[0][0], ourPieces[0][1][0]];
+                var maxScore = 0;
+                var maxScoreMove = [AISelf.ourPieces[0][0], AISelf.ourPieces[0][1][0]];
+
+                for (var i = 0; i < AISelf.ourPieces.length; i++) {
+                    var piece = AISelf.ourPieces[i][0];
+                    var pieceMoves = AISelf.ourPieces[i][1];
+                    for (var j = 0; j < pieceMoves.length; j++) {
+                        var move = pieceMoves[j];
+                        var currentScore = AISelf.scoreMove(piece, move);
+                        if (currentScore > maxScore) {
+                            maxScoreMove = [piece, move];
+                            currentScore = maxScore;
+                        }
+                    }
+                }
+
                 if (totalNumMovesFound == 0) {
-                    //no moves! TODO something
+                    //no moves! TODO destroy player which can't move?
                     gameState.endHandler.gameOver();
                     gameon.unblockUI()
                 }
@@ -544,7 +639,7 @@ var mmochess = new (function () {
                 setTimeout(function () {
                     //move there
                     maxScoreMove[1].click();
-//                    gameon.unblockUI();
+                    gameon.unblockUI();
                     //gameState.unselectAll();
                 }, 800);
             };
