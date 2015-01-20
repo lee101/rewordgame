@@ -581,15 +581,17 @@ var mmochess = new (function () {
             AISelf.scoreMove = function (startTile, endTile) {
 
                 //simulate move
+                var oldEndTilePos = [endTile.yPos, endTile.xPos];
                 var oldStartTilePos = [startTile.yPos, startTile.xPos];
-                gameState.board.swapTiles(startTile, endTile);
-                gameState.board.setTile(startTile.yPos, startTile.xPos, new EmptyTile());
+
+                gameState.board.setTile(oldEndTilePos, new EmptyTile());
+                gameState.board.swapTiles(oldStartTilePos, oldEndTilePos);
 
                 var boardScore = AISelf.scoreBoard();
 
                 //rollback board state
-                gameState.board.setTile(startTile.yPos, startTile.xPos, endTile);//alters the endtile
-                gameState.board.swapTiles(startTile, oldStartTilePos);
+                gameState.board.swapTiles(oldStartTilePos, oldEndTilePos);
+                gameState.board.setTile(oldEndTilePos, endTile);//alters the endtile
 
                 return boardScore;
             };
