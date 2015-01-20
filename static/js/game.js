@@ -491,12 +491,21 @@ var mmochess = new (function () {
 
             return endSelf;
         };
+        gameState.MainTile = MainTile;
+        gameState.EmptyTile = EmptyTile;
 
         gameState.AIHandler = function () {
             var AISelf = {};
             //hatred based on distance/total scores todo recalculate
             // full hate = numplayers-1, no hate = 0
             AISelf.hatredMatrix = {
+                1: {
+                    2: 1.1,
+                    3: 1,
+                    4: 1,
+                    5: 1,
+                    6: 1
+                },
                 2: {
                     1:1.1,
                     3:1.1,
@@ -565,15 +574,20 @@ var mmochess = new (function () {
                 }
 
                 var boardsScore = 0;
-                for (var playerNum = 0; playerNum < level.num_players; playerNum++) {
-                    if (playerNum == gameState.players_turn) {
-                        boardsScore += playersPower[playerNum];
-                    }
-                    else {
-                        boardsScore -= playersPower[playerNum] / (level.num_players-1) *
-                            AISelf.hatredMatrix[gameState.players_turn][playerNum];
+
+                function changeScore(changer) {
+                    for (var playerNum = 1; playerNum <= level.num_players; playerNum++) {
+                        if (playerNum == gameState.players_turn) {
+                            boardsScore += changer[playerNum];
+                        }
+                        else {
+                            boardsScore -= changer[playerNum] / (level.num_players - 1) *
+                                AISelf.hatredMatrix[gameState.players_turn][playerNum];
+                        }
                     }
                 }
+
+                changeScore(playersPower);
 
                 return boardsScore;
             };
@@ -600,8 +614,10 @@ var mmochess = new (function () {
             AISelf.makeAiMove = function () {
                 gameon.blockUI();
 
-                AISelf.ourPieces = [];
                 var totalNumMovesFound = 0;
+
+                var maxScore = -Infinity;
+                var maxScoreMove = [null, null];
 
                 for (var y = 0; y < level.height; y++) {
                     for (var x = 0; x < level.width; x++) {
@@ -609,26 +625,19 @@ var mmochess = new (function () {
                         if (currentTile.playerNum == gameState.players_turn) {
                             var allowedMoves = currentTile.getAllowedMoves();
                             totalNumMovesFound += allowedMoves.length;
-                            AISelf.ourPieces.push([currentTile, allowedMoves]);
+                            for (var j = 0; j < allowedMoves.length; j++) {
+                                var move = allowedMoves[j];
+                                var currentScore = AISelf.scoreMove(currentTile, move);
+                                if (currentScore > maxScore) {
+                                    maxScoreMove = [currentTile, move];
+                                    currentScore = maxScore;
+                                }
+                            }
+
                         }
                     }
                 }
 
-                var maxScore = 0;
-                var maxScoreMove = [AISelf.ourPieces[0][0], AISelf.ourPieces[0][1][0]];
-
-                for (var i = 0; i < AISelf.ourPieces.length; i++) {
-                    var piece = AISelf.ourPieces[i][0];
-                    var pieceMoves = AISelf.ourPieces[i][1];
-                    for (var j = 0; j < pieceMoves.length; j++) {
-                        var move = pieceMoves[j];
-                        var currentScore = AISelf.scoreMove(piece, move);
-                        if (currentScore > maxScore) {
-                            maxScoreMove = [piece, move];
-                            currentScore = maxScore;
-                        }
-                    }
-                }
 
                 if (totalNumMovesFound == 0) {
                     //no moves! TODO destroy player which can't move?
