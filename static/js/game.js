@@ -167,11 +167,13 @@ var mmochess = new (function () {
                 });
                 if (isValidMove) {
                     //moveto this
-                    var path = gameState.board.getPathFromTo(gameState.currentSelected, self);
+                    var path = gameState.board.getPathFromTo(gameState.currentSelected, self, true);
                     if (path) {
+
+                        //shorter=faster
                         var animationSpeed = 200;
                         if (gameState.players_turn != 1 && level.computer_opponent) {
-                            animationSpeed = 400;
+                            animationSpeed = 200;
                         }
 //                        gameon.unmuteSound('moving');
 //                        gameon.playSound('moving');
