@@ -14,7 +14,7 @@ describe("mmochess", function () {
         }
     });
 
-    it('THEN test ai', function (done) {
+    it('AI scoreBoard', function (done) {
         APP.goto('/play');
         specHelpers.once = function () {
             var game = APP.game;
@@ -36,7 +36,7 @@ describe("mmochess", function () {
 
             game.players_turn = 2;
             //score board is relative to a players turn
-            var p2CurrentScore = game.aiHandler.scoreBoard()
+            var p2CurrentScore = game.aiHandler.scoreBoard();
             expect(currentScore).toBeLessThan(p2CurrentScore);
 
             for (var i = 0; i < tiles.length; i++) {
@@ -56,8 +56,32 @@ describe("mmochess", function () {
     });
 
 
-    it('THEN you clock the game!', function (done) {
-        done();
+    it('AI find max move', function (done) {
+        APP.goto('/play');
+        specHelpers.once = function () {
+            var game = APP.game;
+            var board = game.board;
+            var tiles = board.tiles;
+
+            game.players_turn = 2;
+
+            for (var i = 0; i < tiles.length; i++) {
+                var tile = tiles[i];
+                if (tile.playerNum == 2 && tile.type == "pawn") {
+                    var pawn = tile;
+                    board.setTile(tile.yPos + 1, tile.xPos + 1, new game.MainTile('queen', 1));
+                    break;
+                }
+            }
+            var move = game.aiHandler.findMaxScoreMove();
+            expect(move[0].type).toBe("pawn");
+
+            expect(move[1].yPos).toBe(pawn.yPos + 1);
+            expect(move[1].xPos).toBe(pawn.xPos + 1);
+
+            APP.goto('/tests');
+            done();
+        }
     });
 
     it('tears down', function () {

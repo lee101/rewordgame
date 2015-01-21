@@ -295,12 +295,13 @@ var mmochess = new (function () {
                 if (self.type == "bishop" || self.type == "queen") {
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos + i, self.xPos + i];
-                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                        if (gameState.board.getTile(move[0], move[1]) &&
+                            gameState.board.getTile(move[0], move[1]).playerNum &&
                             gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
                             allowedMoves.push(move);
                             break;
                         }
-                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                        else if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum) {
                             break;
                         }
                         else {
@@ -309,12 +310,13 @@ var mmochess = new (function () {
                     }
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos - i, self.xPos + i];
-                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                        if (gameState.board.getTile(move[0], move[1]) &&
+                            gameState.board.getTile(move[0], move[1]).playerNum &&
                             gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
                             allowedMoves.push(move);
                             break;
                         }
-                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                        else if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum) {
                             break;
                         }
                         else {
@@ -323,12 +325,13 @@ var mmochess = new (function () {
                     }
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos + i, self.xPos - i];
-                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                        if (gameState.board.getTile(move[0], move[1]) &&
+                            gameState.board.getTile(move[0], move[1]).playerNum &&
                             gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
                             allowedMoves.push(move);
                             break;
                         }
-                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                        else if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum) {
                             break;
                         }
                         else {
@@ -337,12 +340,13 @@ var mmochess = new (function () {
                     }
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos - i, self.xPos - i];
-                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                        if (gameState.board.getTile(move[0], move[1]) &&
+                            gameState.board.getTile(move[0], move[1]).playerNum &&
                             gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
                             allowedMoves.push(move);
                             break;
                         }
-                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                        else if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum) {
                             break;
                         }
                         else {
@@ -353,12 +357,13 @@ var mmochess = new (function () {
                 if (self.type == "castle" || self.type == "queen") {
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos + i, self.xPos];
-                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                        if (gameState.board.getTile(move[0], move[1]) &&
+                            gameState.board.getTile(move[0], move[1]).playerNum &&
                             gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
                             allowedMoves.push(move);
                             break;
                         }
-                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                        else if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum) {
                             break;
                         }
                         else {
@@ -367,12 +372,13 @@ var mmochess = new (function () {
                     }
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos - i, self.xPos];
-                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                        if (gameState.board.getTile(move[0], move[1]) &&
+                            gameState.board.getTile(move[0], move[1]).playerNum &&
                             gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
                             allowedMoves.push(move);
                             break;
                         }
-                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                        else if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum) {
                             break;
                         }
                         else {
@@ -381,12 +387,12 @@ var mmochess = new (function () {
                     }
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos, self.xPos + i];
-                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                        if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum &&
                             gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
                             allowedMoves.push(move);
                             break;
                         }
-                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                        else if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum) {
                             break;
                         }
                         else {
@@ -395,12 +401,12 @@ var mmochess = new (function () {
                     }
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos, self.xPos - i];
-                        if (gameState.board.getTile(move[0], move[1]).playerNum &&
+                        if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum &&
                             gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
                             allowedMoves.push(move);
                             break;
                         }
-                        else if (gameState.board.getTile(move[0], move[1]).playerNum) {
+                        else if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum) {
                             break;
                         }
                         else {
@@ -507,11 +513,11 @@ var mmochess = new (function () {
                     6: 1
                 },
                 2: {
-                    1:1.1,
-                    3:1.1,
-                    4:1.1,
-                    5:0.9,
-                    6:0.9
+                    1: 1.1,
+                    3: 1.1,
+                    4: 1.1,
+                    5: 0.9,
+                    6: 0.9
                 },
                 3: {
                     1: 1,
@@ -545,7 +551,34 @@ var mmochess = new (function () {
 
             AISelf.boardScore = 0;
             AISelf.scoreBoard = function () {
+                var MOBILITY_FACTOR = 0.03;
+                var PROTECTION_FACTOR = 0.1;
+                var ATTACK_SURFACE_FACTOR = 0.1;
                 var playersPower = {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0,
+                    6: 0
+                };
+                var playersMobility = {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0,
+                    6: 0
+                };
+                var playersProtection = {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0,
+                    6: 0
+                };
+                var playersAttackingSurface = {
                     1: 0,
                     2: 0,
                     3: 0,
@@ -562,13 +595,27 @@ var mmochess = new (function () {
                     6: []
                 };
 
-
                 for (var y = 0; y < level.height; y++) {
                     for (var x = 0; x < level.width; x++) {
                         var currentTile = gameState.board.getTile(y, x);
                         if (currentTile.playerNum) {
                             playersPieces[currentTile.playerNum].push(currentTile);
-                            playersPower[currentTile.playerNum] += fixtures.piecesPower[currentTile.type]
+                            playersPower[currentTile.playerNum] += fixtures.piecesPower[currentTile.type];
+
+                            var allowedMoves = currentTile.getAllowedMoves();
+                            playersMobility[currentTile.playerNum] += allowedMoves.length * MOBILITY_FACTOR;
+                            for (var i = 0; i < allowedMoves.length; i++) {
+                                var move = allowedMoves[i];
+                                if (move.playerNum) {
+                                    if (move.playerNum == currentTile.playerNum) {
+                                        playersProtection[currentTile.playerNum] += 1 / fixtures.piecesPower[currentTile.type] * PROTECTION_FACTOR;
+                                    }
+                                    else {
+                                        playersAttackingSurface[currentTile.playerNum] += fixtures.piecesPower[currentTile.type] * ATTACK_SURFACE_FACTOR
+                                    }
+                                }
+
+                            }
                         }
                     }
                 }
@@ -588,6 +635,9 @@ var mmochess = new (function () {
                 }
 
                 changeScore(playersPower);
+                changeScore(playersMobility);
+                changeScore(playersAttackingSurface);
+                changeScore(playersProtection);
 
                 return boardsScore;
             };
@@ -610,10 +660,7 @@ var mmochess = new (function () {
                 return boardScore;
             };
 
-
-            AISelf.makeAiMove = function () {
-                gameon.blockUI();
-
+            AISelf.findMaxScoreMove = function () {
                 var totalNumMovesFound = 0;
 
                 var maxScore = -Infinity;
@@ -630,16 +677,22 @@ var mmochess = new (function () {
                                 var currentScore = AISelf.scoreMove(currentTile, move);
                                 if (currentScore > maxScore) {
                                     maxScoreMove = [currentTile, move];
-                                    currentScore = maxScore;
+                                    maxScore = currentScore;
                                 }
                             }
-
                         }
                     }
                 }
+                return maxScoreMove;
+            };
 
 
-                if (totalNumMovesFound == 0) {
+            AISelf.makeAiMove = function () {
+                gameon.blockUI();
+
+                var maxScoreMove = AISelf.findMaxScoreMove();
+
+                if (!maxScoreMove) {
                     //no moves! TODO destroy player which can't move?
                     gameState.endHandler.gameOver();
                     gameon.unblockUI()
