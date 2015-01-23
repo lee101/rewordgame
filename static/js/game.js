@@ -582,8 +582,9 @@ var mmochess = new (function () {
             AISelf.scoreBoard = function () {
                 var MOBILITY_FACTOR = 0.03;
                 var PROTECTION_FACTOR = 0.1;
+                //todo reduce attack surface factor based on multiples
                 var ATTACK_SURFACE_FACTOR = 0.1;
-                var DANGER_FACTOR = 0.4;
+                var DANGER_FACTOR = ATTACK_SURFACE_FACTOR * (level.num_players - 1);
                 var playersPower = {
                     1: 0,
                     2: 0,
@@ -633,27 +634,32 @@ var mmochess = new (function () {
                     6: []
                 };
 
-                for (var y = 0; y < level.height; y++) {
-                    for (var x = 0; x < level.width; x++) {
-                        var currentTile = gameState.board.getTile(y, x);
-                        if (currentTile.playerNum) {
-                            playersPieces[currentTile.playerNum].push(currentTile);
-                            playersPower[currentTile.playerNum] += fixtures.piecesPower[currentTile.type];
+                var tilesToTilesTheyCanTake = {};
+                var tilesToTilesWhichCanTakeThem = {};
 
-                            var allowedMoves = currentTile.getAllowedMoves();
-                            playersMobility[currentTile.playerNum] += allowedMoves.length * MOBILITY_FACTOR;
-                            for (var i = 0; i < allowedMoves.length; i++) {
-                                var move = allowedMoves[i];
-                                if (move.playerNum) {
-                                    if (move.playerNum == currentTile.playerNum) {
-                                        playersProtection[currentTile.playerNum] += 1 / fixtures.piecesPower[currentTile.type] * PROTECTION_FACTOR;
-                                    }
-                                    else {
-                                        playersAttackingSurface[currentTile.playerNum] += fixtures.piecesPower[currentTile.type] * ATTACK_SURFACE_FACTOR;
-                                        playersDirectDanger[move.playerNum] -= fixtures.piecesPower[currentTile.type] * DANGER_FACTOR
-                                    }
+                for (var tileNum = 0; tileNum < gameState.board.tiles.length; tileNum++) {
+                    var currentTile = gameState.board.tiles[tileNum];
+                    if (currentTile.playerNum) {
+                        playersPieces[currentTile.playerNum].push(currentTile);
+                        playersPower[currentTile.playerNum] += fixtures.piecesPower[currentTile.type];
+
+                        //include take yourself moves!
+                        var tmpPlayerNum = currentTile.playerNum;
+                        currentTile.playerNum = -1;
+                        var allowedMoves = currentTile.getAllowedMoves();
+                        currentTile.playerNum = tmpPlayerNum;
+
+                        playersMobility[currentTile.playerNum] += allowedMoves.length * MOBILITY_FACTOR;
+                        for (var i = 0; i < allowedMoves.length; i++) {
+                            var move = allowedMoves[i];
+                            if (move.playerNum) {
+                                if (move.playerNum == currentTile.playerNum) {
+                                    playersProtection[currentTile.playerNum] += 1 / fixtures.piecesPower[move.type] * PROTECTION_FACTOR;
                                 }
-
+                                else {
+                                    playersAttackingSurface[currentTile.playerNum] += fixtures.piecesPower[move.type] * ATTACK_SURFACE_FACTOR;
+                                    playersDirectDanger[move.playerNum] -= fixtures.piecesPower[move.type] * DANGER_FACTOR
+                                }
                             }
                         }
                     }

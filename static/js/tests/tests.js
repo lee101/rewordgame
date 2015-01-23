@@ -50,6 +50,33 @@ describe("mmochess", function () {
 
             expect(newCurrentScore).toBe(game.aiHandler.scoreBoard());
 
+            for (var i = 0; i < tiles.length; i++) {
+                var tile = tiles[i];
+                if (tile.playerNum == 2 && tile.type == "pawn") {
+                    var pawn = tile;
+                    var queenPos = [tile.yPos + 1, tile.xPos + 1];
+                    board.setTile(queenPos, new game.MainTile('queen', 1));
+                    break;
+                }
+            }
+
+            var ownedByQueenScore = game.aiHandler.scoreBoard();
+            expect(newCurrentScore).toBeGreaterThan(ownedByQueenScore);
+
+            //compare moving horse to taking the queen
+
+            board.setTile(queenPos, new game.EmptyTile());
+            var notOwnedByQueenScore = game.aiHandler.scoreBoard();
+            expect(notOwnedByQueenScore).toBeGreaterThan(ownedByQueenScore);
+
+            board.setTile(queenPos, new game.MainTile('queen', 1));
+
+            board.setTile(queenPos[0] - 2, queenPos[1] - 2, new game.MainTile('pawn', 2));
+            var stillOwnedByQueenScore = game.aiHandler.scoreBoard();
+
+            expect(notOwnedByQueenScore).toBeGreaterThan(stillOwnedByQueenScore);
+
+
             APP.goto('/tests');
             done();
         }
@@ -69,15 +96,17 @@ describe("mmochess", function () {
                 var tile = tiles[i];
                 if (tile.playerNum == 2 && tile.type == "pawn") {
                     var pawn = tile;
-                    board.setTile(tile.yPos + 1, tile.xPos + 1, new game.MainTile('queen', 1));
+                    var queenPos = [tile.yPos + 1, tile.xPos + 1];
+                    board.setTile(queenPos, new game.MainTile('queen', 1));
                     break;
                 }
             }
             var move = game.aiHandler.findMaxScoreMove();
             expect(move[0].type).toBe("pawn");
 
-            expect(move[1].yPos).toBe(pawn.yPos + 1);
-            expect(move[1].xPos).toBe(pawn.xPos + 1);
+            expect(move[1].type).toBe("queen");
+
+
 
             APP.goto('/tests');
             done();
