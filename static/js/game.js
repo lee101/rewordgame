@@ -274,6 +274,18 @@ var mmochess = new (function () {
                 }
 
                 var allowedMoves = [];
+                if (self.type == "king") {
+                    allowedMoves = [
+                        [self.yPos + 1, self.xPos],
+                        [self.yPos, self.xPos + 1],
+                        [self.yPos - 1, self.xPos ],
+                        [self.yPos, self.xPos - 1],
+                        [self.yPos + 1, self.xPos + 1],
+                        [self.yPos - 1, self.xPos + 1],
+                        [self.yPos + 1, self.xPos - 1],
+                        [self.yPos - 1, self.xPos - 1]
+                    ];
+                }
                 if (self.type == "pawn") {
                     var normalMoves = [
                         [self.yPos + 1, self.xPos],
@@ -690,8 +702,6 @@ var mmochess = new (function () {
                     5: 0,
                     6: 0
                 };
-
-
 
 
                 $.each(tilesToTilesTheyCanTake, function (tileIdx, tilesWeCanTake) {
