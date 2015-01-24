@@ -1,7 +1,7 @@
 {
   "name": "mmochess",
   "version": "1.0.0",
-  "description": "mmo chess",
+  "description": "big multiplayer chess",
   "main": "gruntfile.js",
   "directories": {
     "test": "tests"
