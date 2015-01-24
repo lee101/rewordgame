@@ -252,11 +252,14 @@ var mmochess = new (function () {
 
             self.selected = false;
 
-            self.getAllowedMoves = function () {
+            self.getAllowedMoves = function (currentPlayer) {
+                if (typeof currentPlayer == 'undefined') {
+                    currentPlayer = gameState.players_turn;
+                }
                 function validateMoves(positions) {
                     return _.map(_.filter(positions, function (position) {
                         return gameState.board.isInBoard(position[0], position[1]) &&
-                            gameState.board.getTile(position[0], position[1]).playerNum != gameState.players_turn;
+                            gameState.board.getTile(position[0], position[1]).playerNum != currentPlayer;
                     }), function (move) {
                         return gameState.board.getTile(move[0], move[1]);
                     });
@@ -265,7 +268,7 @@ var mmochess = new (function () {
                 function addDiag(y, x) {
                     if (gameState.board.isInBoard(y, x) &&
                         gameState.board.getTile(y, x).playerNum &&
-                        gameState.board.getTile(y, x).playerNum != gameState.players_turn) {
+                        gameState.board.getTile(y, x).playerNum != currentPlayer) {
                         allowedMoves.push([y, x])
                     }
                 }
@@ -325,7 +328,7 @@ var mmochess = new (function () {
                         var move = [self.yPos + i, self.xPos + i];
                         if (gameState.board.getTile(move[0], move[1]) &&
                             gameState.board.getTile(move[0], move[1]).playerNum &&
-                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            gameState.board.getTile(move[0], move[1]).playerNum != currentPlayer) {
                             allowedMoves.push(move);
                             break;
                         }
@@ -340,7 +343,7 @@ var mmochess = new (function () {
                         var move = [self.yPos - i, self.xPos + i];
                         if (gameState.board.getTile(move[0], move[1]) &&
                             gameState.board.getTile(move[0], move[1]).playerNum &&
-                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            gameState.board.getTile(move[0], move[1]).playerNum != currentPlayer) {
                             allowedMoves.push(move);
                             break;
                         }
@@ -355,7 +358,7 @@ var mmochess = new (function () {
                         var move = [self.yPos + i, self.xPos - i];
                         if (gameState.board.getTile(move[0], move[1]) &&
                             gameState.board.getTile(move[0], move[1]).playerNum &&
-                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            gameState.board.getTile(move[0], move[1]).playerNum != currentPlayer) {
                             allowedMoves.push(move);
                             break;
                         }
@@ -370,7 +373,7 @@ var mmochess = new (function () {
                         var move = [self.yPos - i, self.xPos - i];
                         if (gameState.board.getTile(move[0], move[1]) &&
                             gameState.board.getTile(move[0], move[1]).playerNum &&
-                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            gameState.board.getTile(move[0], move[1]).playerNum != currentPlayer) {
                             allowedMoves.push(move);
                             break;
                         }
@@ -387,7 +390,7 @@ var mmochess = new (function () {
                         var move = [self.yPos + i, self.xPos];
                         if (gameState.board.getTile(move[0], move[1]) &&
                             gameState.board.getTile(move[0], move[1]).playerNum &&
-                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            gameState.board.getTile(move[0], move[1]).playerNum != currentPlayer) {
                             allowedMoves.push(move);
                             break;
                         }
@@ -402,7 +405,7 @@ var mmochess = new (function () {
                         var move = [self.yPos - i, self.xPos];
                         if (gameState.board.getTile(move[0], move[1]) &&
                             gameState.board.getTile(move[0], move[1]).playerNum &&
-                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            gameState.board.getTile(move[0], move[1]).playerNum != currentPlayer) {
                             allowedMoves.push(move);
                             break;
                         }
@@ -416,7 +419,7 @@ var mmochess = new (function () {
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos, self.xPos + i];
                         if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum &&
-                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            gameState.board.getTile(move[0], move[1]).playerNum != currentPlayer) {
                             allowedMoves.push(move);
                             break;
                         }
@@ -430,7 +433,7 @@ var mmochess = new (function () {
                     for (var i = 1; i < 8; i++) {
                         var move = [self.yPos, self.xPos - i];
                         if (gameState.board.getTile(move[0], move[1]) && gameState.board.getTile(move[0], move[1]).playerNum &&
-                            gameState.board.getTile(move[0], move[1]).playerNum != gameState.players_turn) {
+                            gameState.board.getTile(move[0], move[1]).playerNum != currentPlayer) {
                             allowedMoves.push(move);
                             break;
                         }
@@ -489,7 +492,7 @@ var mmochess = new (function () {
             endSelf.turnEnd = function (startTile, endTile) {
                 //figure out if endtile should be removed(ifpiece is taken)
                 gameState.board.setTile(endTile.yPos, endTile.xPos, new EmptyTile());
-                startTile.timesMoved ++;
+                startTile.timesMoved++;
 
                 gameState.board.swapTiles(startTile, endTile);
 
@@ -625,29 +628,19 @@ var mmochess = new (function () {
                     5: 0,
                     6: 0
                 };
-                var playersPieces = {
-                    1: [],
-                    2: [],
-                    3: [],
-                    4: [],
-                    5: [],
-                    6: []
-                };
 
                 var tilesToTilesTheyCanTake = {};
                 var tilesToTilesWhichCanTakeThem = {};
+                var tilesToOwnTilesTheyCanTake = {};
+                var tilesToOwnTilesWhichCanTakeThem = {};
 
                 for (var tileNum = 0; tileNum < gameState.board.tiles.length; tileNum++) {
                     var currentTile = gameState.board.tiles[tileNum];
                     if (currentTile.playerNum) {
-                        playersPieces[currentTile.playerNum].push(currentTile);
                         playersPower[currentTile.playerNum] += fixtures.piecesPower[currentTile.type];
 
                         //include take yourself moves!
-                        var tmpPlayerNum = currentTile.playerNum;
-                        currentTile.playerNum = -1;
-                        var allowedMoves = currentTile.getAllowedMoves();
-                        currentTile.playerNum = tmpPlayerNum;
+                        var allowedMoves = currentTile.getAllowedMoves(-1);
 
                         playersMobility[currentTile.playerNum] += allowedMoves.length * MOBILITY_FACTOR;
                         for (var i = 0; i < allowedMoves.length; i++) {
@@ -655,15 +648,90 @@ var mmochess = new (function () {
                             if (move.playerNum) {
                                 if (move.playerNum == currentTile.playerNum) {
                                     playersProtection[currentTile.playerNum] += 1 / fixtures.piecesPower[move.type] * PROTECTION_FACTOR;
+                                    if ($.isArray(tilesToOwnTilesWhichCanTakeThem[move])) {
+                                        tilesToOwnTilesWhichCanTakeThem[move].push(currentTile);
+                                    }
+                                    else {
+                                        tilesToOwnTilesWhichCanTakeThem[move] = [currentTile];
+                                    }
+                                    if ($.isArray(tilesToOwnTilesTheyCanTake[move])) {
+                                        tilesToOwnTilesTheyCanTake[move].push(currentTile);
+                                    }
+                                    else {
+                                        tilesToOwnTilesTheyCanTake[move] = [currentTile];
+                                    }
                                 }
                                 else {
-                                    playersAttackingSurface[currentTile.playerNum] += fixtures.piecesPower[move.type] * ATTACK_SURFACE_FACTOR;
-                                    playersDirectDanger[move.playerNum] -= fixtures.piecesPower[move.type] * DANGER_FACTOR
+                                    playersAttackingSurface[currentTile.playerNum] += fixtures.piecesPower[move.type] * ATTACK_SURFACE_FACTOR
+                                    playersDirectDanger[move.playerNum] -= fixtures.piecesPower[move.type] * DANGER_FACTOR;
+                                    if ($.isArray(tilesToTilesTheyCanTake[currentTile])) {
+                                        tilesToTilesTheyCanTake[currentTile].push(move);
+                                    }
+                                    else {
+                                        tilesToTilesTheyCanTake[currentTile] = [move];
+                                    }
+                                    if ($.isArray(tilesToTilesWhichCanTakeThem[move])) {
+                                        tilesToTilesWhichCanTakeThem[move].push(currentTile);
+                                    }
+                                    else {
+                                        tilesToTilesWhichCanTakeThem[move] = [currentTile];
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
+                var playersExchangeScores = {
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 0,
+                    6: 0
+                };
+
+
+
+
+                $.each(tilesToTilesTheyCanTake, function (tileIdx, tilesWeCanTake) {
+                    var tile = gameState.board.getTile(tileIdx.split('-'));
+                    //does taking them cause a favourable exchange?
+                    for (var j = 0; j < tilesWeCanTake.length; j++) {
+                        var playersCurrentExchangeScores = {
+                            1: 0,
+                            2: 0,
+                            3: 0,
+                            4: 0,
+                            5: 0,
+                            6: 0
+                        };
+                        var tileWeCanTake = tilesWeCanTake[j];
+                        var tilesProtectors = tilesToOwnTilesWhichCanTakeThem[tileWeCanTake];
+                        var tilesAggressors = tilesToTilesWhichCanTakeThem[tileWeCanTake];
+                        tilesProtectors = _.sortBy(tilesProtectors, function (tile) {
+                            return fixtures.piecesPower[tile.type];
+                        });
+                        tilesAggressors = _.sortBy(tilesAggressors, function (tile) {
+                            return fixtures.piecesPower[tile.type];
+                        });
+
+                        playersCurrentExchangeScores[tileWeCanTake.playerNum] -= fixtures.piecesPower[tileWeCanTake.type];
+                        for (var k = 0; k < tilesAggressors.length && k < tilesProtectors.length; k++) {
+                            var aggressor = tilesAggressors[k];
+                            var defender = tilesProtectors[k];
+                            playersCurrentExchangeScores[aggressor.playerNum] -= fixtures.piecesPower[aggressor.type];
+                            playersCurrentExchangeScores[defender.playerNum] -= fixtures.piecesPower[defender.type];
+                        }
+
+                        $.each(playersCurrentExchangeScores, function (playerNum, score) {
+                            playersExchangeScores[playerNum] += score
+                        });
+                        //todo dampering when multiple playernums are counted in the conflict
+
+                    }
+                });
+
 
                 var boardsScore = 0;
 
@@ -681,6 +749,7 @@ var mmochess = new (function () {
 
                 changeScore(playersPower);
                 changeScore(playersMobility);
+
                 changeScore(playersAttackingSurface);
                 changeScore(playersProtection);
                 changeScore(playersDirectDanger);
