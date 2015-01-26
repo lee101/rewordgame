@@ -76,6 +76,23 @@ describe("mmochess", function () {
 
             expect(notOwnedByQueenScore).toBeGreaterThan(stillOwnedByQueenScore);
 
+            //compare to king
+
+            board.setTile(queenPos, new game.EmptyTile());
+            var notOwnedScore = game.aiHandler.scoreBoard();
+            expect(notOwnedScore).toBeGreaterThan(ownedByQueenScore);
+
+            board.setTile(queenPos, new game.MainTile('king', 1));
+            var ownedByKingScore = game.aiHandler.scoreBoard();
+            expect(ownedByQueenScore).toBeGreaterThan(ownedByKingScore);
+            expect(notOwnedScore).toBeGreaterThan(ownedByKingScore);
+
+
+            board.setTile(queenPos[0] - 3, queenPos[1] - 3, new game.MainTile('pawn', 2));
+            var stillOwnedByKingScore = game.aiHandler.scoreBoard();
+
+            expect(stillOwnedByKingScore).toBeGreaterThan(ownedByKingScore);
+            expect(notOwnedScore).toBeGreaterThan(stillOwnedByKingScore);
 
             APP.goto('/tests');
             done();
@@ -102,10 +119,24 @@ describe("mmochess", function () {
                 }
             }
             var move = game.aiHandler.findMaxScoreMove();
-            expect(move[0].type).toBe("pawn");
+//            expect(move[0].type).toBe("pawn");
 
             expect(move[1].type).toBe("queen");
 
+            for (var i = 0; i < tiles.length; i++) {
+                var tile = tiles[i];
+                if (tile.playerNum == 2 && tile.type == "pawn") {
+                    var pawn = tile;
+                    var queenPos = [tile.yPos + 1, tile.xPos + 1];
+                    board.setTile(queenPos, new game.MainTile('king', 1));
+                    break;
+                }
+            }
+            var move = game.aiHandler.findMaxScoreMove();
+
+            expect(move[0].type).toBe("pawn");
+
+            expect(move[1].type).toBe("king");
 
 
             APP.goto('/tests');

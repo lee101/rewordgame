@@ -595,10 +595,10 @@ var mmochess = new (function () {
 
             AISelf.boardScore = 0;
             AISelf.scoreBoard = function () {
-                var MOBILITY_FACTOR = 0.03;
-                var PROTECTION_FACTOR = 0.1;
+                var MOBILITY_FACTOR = 0.01;
+                var PROTECTION_FACTOR = 0.01;
                 //todo reduce attack surface factor based on multiples
-                var ATTACK_SURFACE_FACTOR = 0.1;
+                var ATTACK_SURFACE_FACTOR = 0.01;
                 var DANGER_FACTOR = ATTACK_SURFACE_FACTOR * (level.num_players - 1);
                 var playersPower = {
                     1: 0,
