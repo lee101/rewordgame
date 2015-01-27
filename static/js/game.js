@@ -467,9 +467,6 @@ var mmochess = new (function () {
                     selectedClass = ' chess-piece--selected';
                 }
                 var pieceText = fixtures.pieces[self.type];
-                if (self.playerNum === 1) {
-                    pieceText = fixtures.whitePieces[self.type];
-                }
                 return '<button type="button" class="chess-piece chess-piece--player-' + self.playerNum + selectedClass + '">' + pieceText +
                     '</button>';
             };
