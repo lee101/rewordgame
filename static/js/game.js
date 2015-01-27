@@ -508,16 +508,20 @@ var mmochess = new (function () {
 
                 gameState.board.swapTiles(startTile, endTile);
 
+                endSelf.nextTurn();
+
+                gameState.board.render();
+            };
+
+            endSelf.nextTurn = function () {
                 gameState.players_turn = gameState.players_turn++ % level.num_players + 1;
 
                 if (gameState.players_turn != 1) {
                     if (level.computer_opponent) {
                         gameState.aiHandler.makeAiMove();
                     }
-                }
-
-                gameState.board.render();
-            };
+                };
+            }
 
 
             endSelf.gameOver = function () {
@@ -819,10 +823,12 @@ var mmochess = new (function () {
 
                 var maxScoreMove = AISelf.findMaxScoreMove();
 
-                if (!maxScoreMove) {
+                if (!maxScoreMove[0]) {
                     //no moves! TODO destroy player which can't move?
-                    gameState.endHandler.gameOver();
-                    gameon.unblockUI()
+                    //todo if all turns dont work then gameover
+                    endSelf.nextTurn();
+//                    gameState.endHandler.gameOver();
+                    gameon.unblockUI();
                 }
 
                 //update view
