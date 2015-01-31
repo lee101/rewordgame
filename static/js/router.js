@@ -57,6 +57,9 @@
     function animateTo(view) {
         var $mainbody = $('#mainbody');
         var duration = 300;
+        if (gameon.noAnimation) {
+            duration = 0;
+        }
 
         $mainbody.fadeOut(duration, function () {
             if (currentView) {

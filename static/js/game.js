@@ -823,9 +823,10 @@ var mmochess = new (function () {
                 if (!maxScoreMove[0]) {
                     //no moves! TODO destroy player which can't move?
                     //todo if all turns dont work then gameover
-                    endSelf.nextTurn();
+                    gameState.endHandler.nextTurn();
 //                    gameState.endHandler.gameOver();
                     gameon.unblockUI();
+                    return;
                 }
 
                 //update view
