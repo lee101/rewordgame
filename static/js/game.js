@@ -499,12 +499,15 @@ var mmochess = new (function () {
             };
 
             endSelf.turnEnd = function (startTile, endTile) {
+                var startPlayerNum = startTile.playerNum;
+                var endPlayerNum = endTile.playerNum;
+
                 if(endTile.type == "king") {
                     //todo kingowned popup
                     for (var i = 0; i < gameState.board.tiles.length; i++) {
                         var tile = gameState.board.tiles[i];
-                        if (tile.playerNum == endTile.playerNum) {
-                            tile.playerNum = startTile.playerNum
+                        if (tile.playerNum == endPlayerNum) {
+                            tile.playerNum = startPlayerNum
                         }
                     }
                 }

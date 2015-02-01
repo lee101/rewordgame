@@ -77,7 +77,7 @@ describe("mmochess", function () {
         playRound(done);
     });
 
-    it('You straight take a king and gain all their pieces', function (done) {
+    it('Take a king and gain all their pieces', function (done) {
         APP.goto('/');
         jasmine.clock().tick(1001);
         jasmine.clock().tick(1001);
