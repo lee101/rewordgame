@@ -499,6 +499,15 @@ var mmochess = new (function () {
             };
 
             endSelf.turnEnd = function (startTile, endTile) {
+                if(endTile.type == "king") {
+                    //todo kingowned popup
+                    for (var i = 0; i < gameState.board.tiles.length; i++) {
+                        var tile = gameState.board.tiles[i];
+                        if (tile.playerNum == endTile.playerNum) {
+                            tile.playerNum = startTile.playerNum
+                        }
+                    }
+                }
                 //figure out if endtile should be removed(ifpiece is taken)
                 gameState.board.setTile(endTile.yPos, endTile.xPos, new EmptyTile());
                 startTile.timesMoved++;

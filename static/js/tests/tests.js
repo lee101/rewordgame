@@ -58,6 +58,7 @@ describe("mmochess", function () {
         expect(game.players_turn).toBe(1);
         done()
     };
+
     it('THEN lets you play a round', playRound);
 
     it('Then round is played with a player down', function (done) {
@@ -75,6 +76,43 @@ describe("mmochess", function () {
         }
         playRound(done);
     });
+
+    it('You straight take a king and gain all their pieces', function (done) {
+        APP.goto('/');
+        jasmine.clock().tick(1001);
+        jasmine.clock().tick(1001);
+
+        APP.goto('/play');
+        jasmine.clock().tick(1001);
+        jasmine.clock().tick(1001);
+        var game = APP.game;
+        var board = game.board;
+        var tiles = board.tiles;
+
+        var startTile, endTile;
+        for (var i = 0; i < tiles.length; i++) {
+            var tile = tiles[i];
+            if (tile.playerNum == 1 && tile.type == "queen") {
+                startTile = tile;
+            }
+            else if (tile.playerNum == 2 && tile.type == "king") {
+                endTile = tile;
+            }
+        }
+        game.endHandler.turnEnd(startTile, endTile);
+
+        var hasPiece = false;
+        for (var i = 0; i < tiles.length; i++) {
+            var tile = tiles[i];
+            if (tile.playerNum == 2) {
+                hasPiece = true;
+                break;
+            }
+        }
+        expect(hasPiece).toBe(false)
+        done()
+    });
+
     it('AI scoreBoard', function (done) {
         APP.goto('/');
         jasmine.clock().tick(1001);
