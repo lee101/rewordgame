@@ -251,6 +251,9 @@ describe("mmochess", function () {
     it('tears down', function () {
         APP.goto('/tests');
         jasmine.clock().tick(1001);
+        jasmine.clock().tick(1001);
+        jasmine.clock().tick(1001);
+        gameon.unblockUI();
 
     });
 });
