@@ -1,6 +1,6 @@
 {
     "name": "Big Multiplayer Chess",
-    "description": "Giant Chess",
+    "description": "Giant Chess! 6+ Players battling on the same chess board! Capture a king and gain another empire! Pawns can move any direction!",
     "version": "4",
     "manifest_version": 2,
     "app": {
@@ -12,9 +12,9 @@
         }
     },
     "icons": {
-        "128": "/static/img/wordsmashing_icon128.png",
-        "64": "/static/img/wordsmashing_icon64.png",
-        "60": "/static/img/wordsmashing_icon60.png"
+        "128": "/static/img/big-multiplayer-chess-logo128.png",
+        "64": "/static/img/big-multiplayer-chess-logo64.png",
+        "60": "/static/icons/apple-touch-icon-60x60.png"
     },
     "fullscreen": "true",
     "developer": {
