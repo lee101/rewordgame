@@ -502,7 +502,7 @@ var mmochess = new (function () {
                 var startPlayerNum = startTile.playerNum;
                 var endPlayerNum = endTile.playerNum;
 
-                if(endTile.type == "king") {
+                if (endTile.type == "king") {
                     //todo kingowned popup
                     for (var i = 0; i < gameState.board.tiles.length; i++) {
                         var tile = gameState.board.tiles[i];
@@ -526,10 +526,12 @@ var mmochess = new (function () {
                 gameState.players_turn = gameState.players_turn++ % level.num_players + 1;
 
                 if (gameState.players_turn != 1) {
-                    if (level.computer_opponent) {
-                        gameState.aiHandler.makeAiMove();
+                    if (level.num_human_players < gameState.players_turn) {
+                        if (level.computer_opponent) {
+                            gameState.aiHandler.makeAiMove();
+                        }
                     }
-                };
+                }
             }
 
 
