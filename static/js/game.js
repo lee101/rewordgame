@@ -532,7 +532,7 @@ var mmochess = new (function () {
                         }
                     }
                 }
-            }
+            };
 
 
             endSelf.gameOver = function () {
@@ -689,7 +689,7 @@ var mmochess = new (function () {
                                     }
                                 }
                                 else {
-                                    playersAttackingSurface[currentTile.playerNum] += fixtures.piecesPower[move.type] * ATTACK_SURFACE_FACTOR
+                                    playersAttackingSurface[currentTile.playerNum] += fixtures.piecesPower[move.type] * ATTACK_SURFACE_FACTOR;
                                     playersDirectDanger[move.playerNum] -= fixtures.piecesPower[move.type] * DANGER_FACTOR;
                                     if ($.isArray(tilesToTilesTheyCanTake[currentTile])) {
                                         tilesToTilesTheyCanTake[currentTile].push(move);
