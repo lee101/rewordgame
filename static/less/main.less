@@ -22,6 +22,7 @@
     font-size: 18px;
     padding: 6px 12px;
 }
+
 @media (min-height: 420px) {
     .ws-main-btn {
         width: 200px;
@@ -105,7 +106,6 @@
     color: Gray;
 }
 
-
 .mm-end-message {
     font-size: 20px;
 }
@@ -133,21 +133,63 @@ body {
     text-shadow: 0 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
+.chess-piece--selected {
+    text-shadow: 0 0 gold, 1px -1px 0 gold, -1px 1px 0 gold, 1px 1px 0 gold;
+}
+
 .chess-piece--player-1 {
     color: @player-1-color;
+}
+
+.versus-play-btn {
+    border-color: #c0c0c0;
+}
+
+.versus-play-btn:hover,
+.versus-play-btn:focus,
+.versus-play-btn.active,
+{
+    border-color: #919191;
+}
+
+.player-1-color {
+    background-color: darken(@player-1-color, 10%);
+}
+
+.player-1-color:hover,
+.player-1-color:focus,
+.player-1-color.active,
+{
+    background-color: @player-1-color;
 }
 
 .chess-piece--player-2 {
     text-shadow: 0 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
-.chess-piece--selected {
-    text-shadow: 0 0 gold, 1px -1px 0 gold, -1px 1px 0 gold, 1px 1px 0 gold;
 
+.player-2-color {
+    background-color: darken(@player-2-color, 10%);
 }
+
+.player-2-color:hover,
+.player-2-color:focus,
+.player-2-color.active,
+{
+    background-color: @player-2-color;
+}
+
 .chess-piece--player-3 {
     color: @player-3-color;
 }
+
 .player-3-color {
+    background-color: darken(@player-3-color, 10%);
+}
+
+.player-3-color:hover,
+.player-3-color:focus,
+.player-3-color.active,
+{
     background-color: @player-3-color;
 }
 
@@ -155,11 +197,45 @@ body {
     color: @player-4-color;
 }
 
+.player-4-color {
+    background-color: darken(@player-4-color, 10%);
+}
+
+.player-4-color:hover,
+.player-4-color:focus,
+.player-4-color.active,
+{
+    background-color: @player-4-color;
+}
+
 .chess-piece--player-5 {
     color: @player-5-color;
 }
+
+.player-5-color {
+    background-color: darken(@player-5-color, 10%);
+}
+
+.player-5-color:hover,
+.player-5-color:focus,
+.player-5-color.active,
+{
+    background-color: @player-5-color;
+}
+
 .chess-piece--player-6 {
     color: @player-6-color;
+}
+
+.player-6-color {
+    background-color: darken(@player-6-color, 10%);
+}
+
+.player-6-color:hover,
+.player-6-color:focus,
+.player-6-color.active,
+{
+    background-color: @player-6-color;
 }
 
 .gameon-board td {
@@ -169,6 +245,7 @@ body {
     height: 55px;
     border: 1px solid rgb(213, 213, 213);
 }
+
 .gameon-board table {
     overflow: auto;
 }
@@ -177,14 +254,17 @@ body {
     background-color: #868686;
     background: linear-gradient(to bottom, #6e6e6e 0%, #929292 100%)
 }
+
 .gameon-board .odd {
     background-color: #b6b6b6;
     background: linear-gradient(to top, #9f9f9f 0%, #b9b9b9 100%)
 }
+
 .ws-cell-highlight.odd {
     background-color: #3fb63e;
     background: linear-gradient(to top, #3c9f3f 0%, #45b94d 100%)
 }
+
 .ws-cell-highlight.even {
     background-color: #38863f;
     background: linear-gradient(to bottom, #2a6e2c 0%, #36923f 100%)

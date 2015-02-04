@@ -307,29 +307,82 @@ body {
   padding: 0;
   text-shadow: 0 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
 }
+.chess-piece--selected {
+  text-shadow: 0 0 #ffd700, 1px -1px 0 #ffd700, -1px 1px 0 #ffd700, 1px 1px 0 #ffd700;
+}
 .chess-piece--player-1 {
   color: #e6e6e6;
+}
+.versus-play-btn {
+  border-color: #c0c0c0;
+}
+.versus-play-btn:hover,
+.versus-play-btn:focus,
+.versus-play-btn.active {
+  border-color: #919191;
+}
+.player-1-color {
+  background-color: #cdcdcd;
+}
+.player-1-color:hover,
+.player-1-color:focus,
+.player-1-color.active {
+  background-color: #e6e6e6;
 }
 .chess-piece--player-2 {
   text-shadow: 0 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
-.chess-piece--selected {
-  text-shadow: 0 0 #ffd700, 1px -1px 0 #ffd700, -1px 1px 0 #ffd700, 1px 1px 0 #ffd700;
+.player-2-color {
+  background-color: #000000;
+}
+.player-2-color:hover,
+.player-2-color:focus,
+.player-2-color.active {
+  background-color: #000000;
 }
 .chess-piece--player-3 {
   color: #391ee2;
 }
 .player-3-color {
+  background-color: #2d17b6;
+}
+.player-3-color:hover,
+.player-3-color:focus,
+.player-3-color.active {
   background-color: #391ee2;
 }
 .chess-piece--player-4 {
   color: #e6393f;
 }
+.player-4-color {
+  background-color: #d21a21;
+}
+.player-4-color:hover,
+.player-4-color:focus,
+.player-4-color.active {
+  background-color: #e6393f;
+}
 .chess-piece--player-5 {
   color: #2ee527;
 }
+.player-5-color {
+  background-color: #1ec217;
+}
+.player-5-color:hover,
+.player-5-color:focus,
+.player-5-color.active {
+  background-color: #2ee527;
+}
 .chess-piece--player-6 {
   color: #39e4d9;
+}
+.player-6-color {
+  background-color: #1ccec2;
+}
+.player-6-color:hover,
+.player-6-color:focus,
+.player-6-color.active {
+  background-color: #39e4d9;
 }
 .gameon-board td {
   min-width: 55px;
