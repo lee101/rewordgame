@@ -319,6 +319,9 @@ body {
 .chess-piece--player-3 {
   color: #391ee2;
 }
+.player-3-color {
+  background-color: #391ee2;
+}
 .chess-piece--player-4 {
   color: #e6393f;
 }

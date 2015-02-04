@@ -138,7 +138,11 @@
         //pages needing js rendering
         'play': 'play',
         'versus/1player': 'versus1player',
-        'versus/2player': 'versus2player'
+        'versus/2player': 'versus2player',
+        'versus/3player': 'versus3player',
+        'versus/4player': 'versus4player',
+        'versus/5player': 'versus5player',
+        'versus/6player': 'versus6player'
     });
 
     var Router = Backbone.Router.extend({
@@ -151,6 +155,10 @@
         'versus': defaultHandler('/versus'),
         'versus1player': defaultHandler('/versus/1player'),
         'versus2player': defaultHandler('/versus/2player'),
+        'versus3player': defaultHandler('/versus/3player'),
+        'versus4player': defaultHandler('/versus/4player'),
+        'versus5player': defaultHandler('/versus/5player'),
+        'versus6player': defaultHandler('/versus/6player'),
         'instructions': defaultHandler('/instructions'),
         'contact': defaultHandler('/contact'),
         'about': defaultHandler('/about'),

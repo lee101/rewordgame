@@ -12,28 +12,31 @@
             return this;
         }
     });
+    function LevelView(numPlayers) {
+        return Backbone.View.extend({
+            initialize: function (options) {
+            },
 
-    var onePlayerLevel = Backbone.View.extend({
-        initialize: function (options) {
-        },
+            render: function () {
+                var self = this;
 
-        render: function () {
-            var self = this;
+                var level = {
+                    "computer_opponent": true,
+                    "height": 12 * 3,
+                    "width": 12 * 2,
+                    "num_players": 6,
+                    "num_human_players": numPlayers
+                };
 
-            var level = {
-                "computer_opponent": true,
-                "height": 12 * 3,
-                "width": 12 * 2,
-                "num_players": 6,
-                "num_human_players": 1
-            };
+                APP.game = new mmochess.Game(level);
+                APP.game.render(self.$el);
 
-            APP.game = new mmochess.Game(level);
-            APP.game.render(self.$el);
+                return self;
+            }
+        });
+    }
 
-            return self;
-        }
-    });
+    var onePlayerLevel = LevelView(1);
     APP.Views['/play'] = onePlayerLevel;
 
 
@@ -60,35 +63,12 @@
 
     APP.Views['/versus/1player'] = onePlayerLevel;
 
-    APP.Views['/versus/2player'] = Backbone.View.extend({
-        initialize: function (options) {
-        },
+    APP.Views['/versus/2player'] = LevelView(2);
+    APP.Views['/versus/3player'] = LevelView(3);
+    APP.Views['/versus/4player'] = LevelView(4);
+    APP.Views['/versus/5player'] = LevelView(5);
+    APP.Views['/versus/6player'] = LevelView(6);
 
-        render: function () {
-            var self = this;
-
-            var level = {
-                "computer_opponent": true,
-                "height": 12 * 3,
-                "width": 12 * 2,
-                "num_players": 6,
-                "num_human_players": 2
-            };
-
-            APP.game = new mmochess.Game(level);
-            APP.game.render(self.$el);
-
-            return self;
-        }
-    });
-
-    APP.Views['/versus/3player'] = Backbone.View.extend({
-        initialize: function (options) {
-        },
-
-        render: function () {
-        }
-    });
 
     APP.Views['/contact'] = Backbone.View.extend({
         initialize: function (options) {
