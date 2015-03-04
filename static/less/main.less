@@ -124,6 +124,31 @@ body {
     height: 100%;
 }
 
+.big-multiplayer-chess-logo {
+    @bmc-color: #ed9c28;
+    font-size: 15px;
+    @media (min-width: 400px) {
+        font-size: 26px;
+    }
+    @media (min-width: 590px) {
+        font-size: 26px;
+    }
+    font-weight: bolder;
+    color: @bmc-color;
+    text-shadow: 0 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    &:hover,
+    &:focus,
+    {
+        text-decoration: none;
+        color: @bmc-color;
+    }
+}
+
+.big-shadow {
+    //    .box-shadow(0 1px 10px rgba(20, 20, 20, 0.5));
+    .drop-shadow(0 0 20 #db524b);
+}
+
 .chess-piece {
     font-size: 40px;
     background-color: rgba(1, 1, 1, 0);

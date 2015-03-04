@@ -13,13 +13,14 @@
         }
     },
     "icons": {
-        "128": "/static/img/big-multiplayer-chess-logo128.png",
-        "64": "/static/img/big-multiplayer-chess-logo64.png",
-        "60": "/static/icons/apple-touch-icon-60x60.png"
+        "128": "big-multiplayer-chess-logo128.png",
+        "64": "big-multiplayer-chess-logo64.png",
+        "60": "apple-touch-icon-60x60.png",
+        "16": "favicon-16x16.png"
     },
     "fullscreen": "true",
     "developer": {
-        "name": "Big Multiplayer Chess",
-        "url": "http://bigmultiplayerchess.com"
+        "name": "Addicting Word Games",
+        "url": "http://www.addictingwordgames.com"
     }
 }

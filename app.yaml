@@ -95,6 +95,7 @@ pagespeed:
   - http://bigmultiplayerchess.com/static/music/*
   - http://bigmultiplayerchess.com/sitemap
   - http://bigmultiplayerchess.com/manifest.webapp
+  - http://bigmultiplayerchess.com/manifest-noads.webapp
   - https://mmochess.appspot.com/buy
   # enabled_rewriters:
   # - CollapseWhitespace
