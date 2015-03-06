@@ -7,7 +7,7 @@ describe("fixtures", function () {
     });
 
 });
-describe("mmochess", function () {
+describe("rewordgame", function () {
     beforeEach(function () {
         jasmine.clock().install();
         jasmine.clock().tick(1001);

@@ -1,4 +1,4 @@
-mmochess
+rewordgame
 ============
 
 BigMultiplayerChess.com an online word search puzzle game and app
