@@ -1,23 +1,59 @@
-
 var rewordgame = new (function () {
     "use strict";
     var self = {};
 
     self.Game = function (level) {
-        var gameState = this;
+        var gameState = {};
 
         function construct() {
-            gameon.pauseAll();
-
-            gameState.players_turn = 1;
 
             var $html = $(evutils.render('static/templates/shared/game.jinja2'));
+            var draggingStates = [];
+            for (var i = 0; i < level.words.length; i++) {
+                draggingStates.push(false);
+            }
+            var $words = $('<div class="reword-words"></div>');
+            for (var i = 0; i < level.words.length; i++) {
 
-            if (level.computer_opponent) {
-                gameState.aiHandler = new gameState.AIHandler();
+                var createReword = function (idx) {
+                    var reSelf = {};
+
+                    reSelf.stopDragging = function () {
+                        self.isDragging = false;
+                        $('body').removeClass('cursor-grabbing')
+                    };
+                    reSelf.startDragging = function () {
+                        self.isDragging = true;
+                        $('body').addClass('cursor-grabbing')
+                    };
+
+                    var word = level.words[idx];
+                    var $wordEl = $('<div class="reword-word underline" data-index="' + idx + '"></div>');
+
+                    $wordEl.on('mousedown', function (evt) {
+                        draggingStates[idx] = true;
+                    });
+                    $(document).on('mousemove', function (evt) {
+                        if (draggingStates[idx]) {
+                            var mousePosX = evt.pageX;
+                            var mousePosY = evt.pageY;
+
+                            $wordEl.css({
+                                left: mousePosX - $wordEl.width() / 2,
+                                top: mousePosY - $wordEl.height()
+                            });
+                        }
+                    });
+                    $(document).on('mouseup', function (evt) {
+                        reSelf.stopDragging();
+                    })
+
+
+                };
+                createReword(i);
             }
 
-
+            $html.append();
 
             gameState.endHandler = new gameState.EndHandler();
             gameState.endHandler.render($html.find('.mm-end-condition'));
@@ -35,7 +71,6 @@ var rewordgame = new (function () {
                 );
             }
         }
-
 
 
         gameState.EndHandler = function () {
@@ -65,7 +100,6 @@ var rewordgame = new (function () {
 
             endSelf.turnEnd = function () {
             };
-
 
 
             endSelf.gameOver = function () {
