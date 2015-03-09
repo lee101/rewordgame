@@ -338,6 +338,8 @@ body {
 }
 .reword-word {
   display: inline-block;
+  margin: 6px;
+  cursor: pointer;
 }
 .chess-piece {
   font-size: 40px;

@@ -12,6 +12,9 @@ var rewordgame = (function () {
             for (var i = 0; i < level.words.length; i++) {
                 draggingStates.push(false);
             }
+
+            var $mouseFollower = $('#mouse-follower');
+
             var $words = $('<div class="reword-words"></div>');
             for (var i = 0; i < level.words.length; i++) {
 
@@ -19,11 +22,11 @@ var rewordgame = (function () {
                     var reSelf = {};
 
                     reSelf.stopDragging = function () {
-                        self.isDragging = false;
+                        draggingStates[idx] = false;
                         $('body').removeClass('cursor-grabbing')
                     };
                     reSelf.startDragging = function () {
-                        self.isDragging = true;
+                        draggingStates[idx] = true;
                         $('body').addClass('cursor-grabbing')
                     };
 
@@ -31,14 +34,14 @@ var rewordgame = (function () {
                     var $wordEl = $('<div class="reword-word underline" data-index="' + idx + '">' + word + '</div>');
 
                     $wordEl.on('mousedown', function (evt) {
-                        draggingStates[idx] = true;
+                        reSelf.startDragging();
                     });
                     $(document).on('mousemove', function (evt) {
                         if (draggingStates[idx]) {
                             var mousePosX = evt.pageX;
                             var mousePosY = evt.pageY;
-
-                            $wordEl.css({
+                            $mouseFollower.text(word);
+                            $mouseFollower.css({
                                 left: mousePosX - $wordEl.width() / 2,
                                 top: mousePosY - $wordEl.height()
                             });
