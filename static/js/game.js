@@ -1,4 +1,4 @@
-var rewordgame = new (function () {
+var rewordgame = (function () {
     "use strict";
     var self = {};
 
@@ -28,7 +28,7 @@ var rewordgame = new (function () {
                     };
 
                     var word = level.words[idx];
-                    var $wordEl = $('<div class="reword-word underline" data-index="' + idx + '"></div>');
+                    var $wordEl = $('<div class="reword-word underline" data-index="' + idx + '">' + word + '</div>');
 
                     $wordEl.on('mousedown', function (evt) {
                         draggingStates[idx] = true;
@@ -46,14 +46,18 @@ var rewordgame = new (function () {
                     });
                     $(document).on('mouseup', function (evt) {
                         reSelf.stopDragging();
-                    })
+                    });
 
-
+                    reSelf.render = function () {
+                        return $wordEl;
+                    };
+                    return reSelf;
                 };
-                createReword(i);
+                var word = createReword(i);
+                $words.append(word.render());
             }
 
-            $html.append();
+            $html.append($words);
 
             gameState.endHandler = new gameState.EndHandler();
             gameState.endHandler.render($html.find('.mm-end-condition'));
@@ -132,7 +136,7 @@ var rewordgame = new (function () {
 
         construct();
         return gameState;
-    }
+    };
 
-
+    return self;
 })();

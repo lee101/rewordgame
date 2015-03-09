@@ -327,6 +327,18 @@ body {
   -ms-filter: drop-shadow(0 0 20px #db524b);
   filter: drop-shadow(0 0 20px #db524b);
 }
+.cursor-grabbing,
+.cursor-grabbing * {
+  cursor: -webkit-grabbing !important;
+  cursor: -moz-grabbing !important;
+  cursor: grabbing !important;
+}
+.reword-words {
+  font-size: 20px;
+}
+.reword-word {
+  display: inline-block;
+}
 .chess-piece {
   font-size: 40px;
   background-color: rgba(1, 1, 1, 0);
