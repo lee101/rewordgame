@@ -25,10 +25,12 @@ var rewordgame = (function () {
                     var $wordEl = $('<div class="reword-word underline" data-index="' + idx + '">' + word + '</div>');
 
                     reSelf.stopDragging = function () {
+                        if (draggingStates[idx]) {
+                            gameState.endHandler.turnEnd($words.find('.reword-word'));
+                        }
                         draggingStates[idx] = false;
                         $('body').removeClass('cursor-grabbing');
                         $wordEl.removeClass('reword-word--selected');
-
                         $mouseFollower.hide();
                     };
                     reSelf.startDragging = function () {
@@ -131,7 +133,6 @@ var rewordgame = (function () {
 
         gameState.EndHandler = function () {
             var endSelf = {};
-            endSelf.moves = level.moves;
             endSelf.render = function (target) {
                 endSelf.$target = $(target);
                 if (level.moves) {
@@ -154,7 +155,15 @@ var rewordgame = (function () {
             endSelf.addToScore = function (score) {
             };
 
-            endSelf.turnEnd = function () {
+            endSelf.turnEnd = function ($words) {
+                for (var i = 0; i < $words.length; i++) {
+                    var $word = $words.eq(i);
+                    if ($word.data('index') != level.correct_ordering[i]) {
+                        return false;
+                    }
+                }
+                //show done
+
             };
 
 

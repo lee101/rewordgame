@@ -7,17 +7,6 @@
         },
 
         render: function () {
-            this.$el.html(evutils.render('static/templates/shared/start.jinja2'));
-
-            return this;
-        }
-    });
-
-    APP.Views['/play'] = Backbone.View.extend({
-        initialize: function (options) {
-        },
-
-        render: function () {
             var self = this;
 
             var level = {
