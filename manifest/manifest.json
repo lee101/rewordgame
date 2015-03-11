@@ -1,6 +1,6 @@
 {
-    "name": "Big Multiplayer Chess",
-    "short_name": "Big Multiplayer Chess - Massive Chess Board Game!",
+    "name": "reWord Game",
+    "short_name": "reWord Game - Massive Chess Board Game!",
     "description": "Giant Chess! 6+ Players battling on the same chess board! Capture a king and gain another empire! Pawns can move any direction!",
     "version": "4",
     "manifest_version": 2,
@@ -19,7 +19,7 @@
     },
     "fullscreen": "true",
     "developer": {
-        "name": "Big Multiplayer Chess",
+        "name": "reWord Game",
         "url": "http://bigmultiplayerchess.com"
     }
 }
