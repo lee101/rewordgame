@@ -21,32 +21,81 @@ var rewordgame = (function () {
                 var createReword = function (idx) {
                     var reSelf = {};
 
-                    reSelf.stopDragging = function () {
-                        draggingStates[idx] = false;
-                        $('body').removeClass('cursor-grabbing')
-                    };
-                    reSelf.startDragging = function () {
-                        draggingStates[idx] = true;
-                        $('body').addClass('cursor-grabbing')
-                    };
-
                     var word = level.words[idx];
                     var $wordEl = $('<div class="reword-word underline" data-index="' + idx + '">' + word + '</div>');
 
+                    reSelf.stopDragging = function () {
+                        draggingStates[idx] = false;
+                        $('body').removeClass('cursor-grabbing');
+                        $wordEl.removeClass('reword-word--selected');
+
+                        $mouseFollower.hide();
+                    };
+                    reSelf.startDragging = function () {
+                        draggingStates[idx] = true;
+                        $('body').addClass('cursor-grabbing');
+                        $mouseFollower.show();
+                    };
+
+
                     $wordEl.on('mousedown', function (evt) {
                         reSelf.startDragging();
+                        reSelf.mouseMove(evt);
+                        return false;
                     });
-                    $(document).on('mousemove', function (evt) {
+                    reSelf.swapAnimate = function ($wordEl1, $wordEl2) {
+                        animateTransitionFinished = false;
+
+                        var w1idx = $wordEl1.data('index');
+                        var w2idx = $wordEl2.data('index');
+                        $wordEl1.data('index', w2idx);
+                        $wordEl2.data('index', w1idx);
+
+                        $wordEl2.animate({left: -$wordEl1.outerWidth()}, 100);
+                        $wordEl1.animate({left: $wordEl2.outerWidth()}, 100, function () {
+                            $wordEl2.detach();
+                            $wordEl1.before($wordEl2);
+                            $wordEl2.css({left: 0});
+                            $wordEl1.css({left: 0});
+                            animateTransitionFinished = true;
+                        })
+                    };
+                    var animateTransitionFinished = true;
+                    reSelf.mouseMove = function (evt) {
                         if (draggingStates[idx]) {
                             var mousePosX = evt.pageX;
                             var mousePosY = evt.pageY;
+
+                            $wordEl.addClass('reword-word--selected');
+
                             $mouseFollower.text(word);
                             $mouseFollower.css({
                                 left: mousePosX - $wordEl.width() / 2,
                                 top: mousePosY - $wordEl.height()
                             });
+
+                            if (animateTransitionFinished) {
+                                var currentIndex = $wordEl.data('index');
+                            //todo get previous child properly
+                                var $previous = $wordEl.prev();
+                                if ($previous.length > 0) {
+                                    var $previousBeforePos = $previous.offset().left + ($previous.outerWidth() / 2);
+                                    if (mousePosX < $previousBeforePos) {
+                                        reSelf.swapAnimate($previous, $wordEl)
+                                    }
+                                }
+                                var $next = $wordEl.next();
+                                if ($next.length > 0) {
+                                    var $previousAfterPos = $next.offset().left + ($next.outerWidth() / 2);
+                                    if (mousePosX >= $previousAfterPos) {
+                                        reSelf.swapAnimate($wordEl, $next)
+                                    }
+                                }
+                            }
                         }
-                    });
+                    };
+
+                    $(document).on('mousemove', reSelf.mouseMove);
                     $(document).on('mouseup', function (evt) {
                         reSelf.stopDragging();
                     });
