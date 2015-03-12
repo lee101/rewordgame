@@ -119,12 +119,7 @@
     }
 
     var prerenderedPages = {
-        "/": "home",
-        '/timed': 'timed',
-        '/classic': 'classic',
-        '/versus': 'versus',
 
-        '/instructions': 'instructions',
         "/about": "about",
         "/contact": "contact",
         "/terms": "terms",
@@ -136,7 +131,7 @@
     });
     jQuery.extend(routes, {
         //pages needing js rendering
-        'home': 'home'
+        '': 'home'
     });
 
     var Router = Backbone.Router.extend({
