@@ -119,7 +119,6 @@
     }
 
     var prerenderedPages = {
-
         "/about": "about",
         "/contact": "contact",
         "/terms": "terms",

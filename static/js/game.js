@@ -22,7 +22,13 @@ var rewordgame = (function () {
                     var reSelf = {};
 
                     var word = level.words[idx];
-                    var $wordEl = $('<div class="reword-word underline" data-index="' + idx + '">' + word + '</div>');
+
+                    var unmovableClass = '';
+                    if (level.unmovables[idx]) {
+                        reSelf.unmovable = true;
+                        unmovableClass = ' reword-word--unmovable'
+                    }
+                    var $wordEl = $('<div class="reword-word' + unmovableClass + '" data-index="' + idx + '">' + word + '</div>');
 
                     reSelf.stopDragging = function () {
                         if (draggingStates[idx]) {
@@ -41,6 +47,9 @@ var rewordgame = (function () {
 
 
                     $wordEl.on('mousedown', function (evt) {
+                        if (reSelf.unmovable) {
+                            return false;
+                        }
                         reSelf.startDragging();
                         reSelf.mouseMove(evt);
                         return false;
@@ -77,8 +86,7 @@ var rewordgame = (function () {
                             });
 
                             if (animateTransitionFinished) {
-                                var currentIndex = $wordEl.data('index');
-                            //todo get previous child properly
+                                //todo get previous child properly
                                 var $previous = $wordEl.prev();
                                 if ($previous.length > 0) {
                                     var $previousBeforePos = $previous.offset().left + ($previous.outerWidth() / 2);

@@ -345,6 +345,10 @@ body {
   border-bottom: 2px orange dotted;
   position: relative;
 }
+.reword-word--unmovable {
+  border-bottom: none;
+  cursor: text;
+}
 .reword-word--selected {
   -webkit-transition: all 300ms;
   -moz-transition: all 300ms;
