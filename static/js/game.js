@@ -57,11 +57,6 @@ var rewordgame = (function () {
                     reSelf.swapAnimate = function ($wordEl1, $wordEl2) {
                         animateTransitionFinished = false;
 
-                        var w1idx = $wordEl1.data('index');
-                        var w2idx = $wordEl2.data('index');
-                        $wordEl1.data('index', w2idx);
-                        $wordEl2.data('index', w1idx);
-
                         $wordEl2.animate({left: -$wordEl1.outerWidth()}, 100);
                         $wordEl1.animate({left: $wordEl2.outerWidth()}, 100, function () {
                             $wordEl2.detach();
@@ -89,16 +84,25 @@ var rewordgame = (function () {
                                 //todo get previous child properly
                                 var $previous = $wordEl.prev();
                                 if ($previous.length > 0) {
-                                    var $previousBeforePos = $previous.offset().left + ($previous.outerWidth() / 2);
-                                    if (mousePosX < $previousBeforePos) {
-                                        reSelf.swapAnimate($previous, $wordEl)
+
+                                    var $previousBeforeXPos = $previous.offset().left + ($previous.outerWidth() / 2);
+                                    if (mousePosX < $previousBeforeXPos) {
+                                        //within same height band or above
+                                        var $previousBeforeYPos = $previous.offset().top + $previous.outerHeight();
+                                        if (mousePosY < $previousBeforeYPos) {
+                                            reSelf.swapAnimate($previous, $wordEl)
+                                        }
                                     }
                                 }
                                 var $next = $wordEl.next();
                                 if ($next.length > 0) {
-                                    var $previousAfterPos = $next.offset().left + ($next.outerWidth() / 2);
-                                    if (mousePosX >= $previousAfterPos) {
-                                        reSelf.swapAnimate($wordEl, $next)
+                                    //within same height band or bellow
+                                    var $previousAfterXPos = $next.offset().left + ($next.outerWidth() / 2);
+                                    if (mousePosX >= $previousAfterXPos) {
+                                        var $previousAfterYPos = $next.offset().top;
+                                        if (mousePosY > $previousAfterYPos) {
+                                            reSelf.swapAnimate($wordEl, $next)
+                                        }
                                     }
                                 }
                             }
@@ -160,9 +164,6 @@ var rewordgame = (function () {
                 endSelf.render(endSelf.$target);
             };
 
-            endSelf.addToScore = function (score) {
-            };
-
             endSelf.turnEnd = function ($words) {
                 for (var i = 0; i < $words.length; i++) {
                     var $word = $words.eq(i);
@@ -172,26 +173,13 @@ var rewordgame = (function () {
                 }
                 //show done
 
-            };
-
-
-            endSelf.gameOver = function () {
-
-                gameState.destruct();
-                APP.doneLevel(level);
-                if (typeof GAMESAPI === 'object') {
-                    GAMESAPI.postScore(gameState.starBar.getScore(), function () {
-                    }, function () {
-                    });
-                    GAMESAPI.endGameSession(
-                        function (response) {
-                            // success callback.  response.statusCode == 200
-                        },
-                        function (response) {
-                            // error handler callback.  response.statusCode != 200
-                        }
-                    );
-                }
+                //gameState.destruct();
+                gameon.getUser(function (user) {
+                    if (user.levels_unlocked < level.id) {
+                        user.saveLevelsUnlocked(level.id);
+                    }
+                    APP.doneLevel(level);
+                });
             };
 
             return endSelf;

@@ -137,6 +137,7 @@
         // Define routes
         'routes': routes,
         'home': defaultHandler('/'),
+        'level': defaultHandler('/level'),
         'contact': defaultHandler('/contact'),
         'about': defaultHandler('/about'),
         'terms': defaultHandler('/terms'),
