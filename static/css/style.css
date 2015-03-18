@@ -361,6 +361,31 @@ body {
   pointer-events: none;
   position: absolute;
 }
+.icon-container {
+  border-radius: 40px;
+  border: 3px solid #3b5997;
+  width: 64px;
+  height: 64px;
+  display: none;
+}
+@media (min-width: 481px) {
+  .icon-container {
+    display: inline-table;
+  }
+}
+.icon-container__icon {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color: #3b5997;
+  font-size: 27px;
+}
+.icon-container__icon--tick {
+  color: green;
+}
+.text-massive {
+  font-size: 60px;
+}
 .chess-piece {
   font-size: 40px;
   background-color: rgba(1, 1, 1, 0);

@@ -43,12 +43,15 @@
         render: function () {
             var self = this;
             if (self.level.id >= fixtures.levels.length) {
-                self.$el.html('<h1>You have won the Game!</h1>');
+                self.$el.html(evutils.render('static/templates/shared/donelevel.jinja2', {
+                    wonGame: true
+                }));
+
             }
-            self.$el.html('<i class="icon-ok"></i>');
-            window.setTimeout(function () {
-                APP.router.level(fixtures.levels[self.level.id + 1])
-            }, 1000);
+            self.$el.html(evutils.render('static/templates/shared/donelevel.jinja2'));
+            //window.setTimeout(function () {
+            //    APP.router.level(fixtures.levels[self.level.id + 1])
+            //}, 1000);
             return self
         }
     });
