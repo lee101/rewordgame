@@ -9,11 +9,15 @@
 
         render: function () {
             var self = this;
+            gameon.getUser(function (user) {
+                if (user.levels_unlocked < fixtures.levels.length) {
+                    var level = fixtures.levels[user.levels_unlocked];
 
-            var level = fixtures.levels[0];
+                    APP.game = new rewordgame.Game(level);
+                    APP.game.render(self.$el);
+                }
+            })
 
-            APP.game = new rewordgame.Game(level);
-            APP.game.render(self.$el);
 
             return self;
         }
@@ -47,11 +51,12 @@
                     wonGame: true
                 }));
 
+            } else {
+                self.$el.html(evutils.render('static/templates/shared/donelevel.jinja2'));
+                window.setTimeout(function () {
+                    APP.router.level(fixtures.levels[self.level.id + 1])
+                }, 1000);
             }
-            self.$el.html(evutils.render('static/templates/shared/donelevel.jinja2'));
-            //window.setTimeout(function () {
-            //    APP.router.level(fixtures.levels[self.level.id + 1])
-            //}, 1000);
             return self
         }
     });

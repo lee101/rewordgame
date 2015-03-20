@@ -35,12 +35,10 @@ var fixtures = (function () {
             }
         },
         {
-            "words": ['yellow', 'orange', 'red', 'blue', 'purple', 'green', 'pink', 'aqua'],
-            "correct_ordering": [0, 1, 2, 6, 4, 3, 7, 5],
+            "words": ['yellow orange red', 'blue', 'purple', 'green', 'pink', 'aqua'],
+            "correct_ordering": [0, 6, 4, 3, 7, 5],
             "unmovables": {
-                0: 1,
-                1: 1,
-                2: 1
+                0: 1
             }
         }
     ];
