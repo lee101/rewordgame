@@ -1,4 +1,4 @@
-application: bigmultiplayerchess
+application: rewordgame
 version: 1
 runtime: python27
 api_version: 1
@@ -92,10 +92,10 @@ automatic_scaling:
 pagespeed:
 
   url_blacklist:
-  - http://bigmultiplayerchess.com/static/music/*
-  - http://bigmultiplayerchess.com/sitemap
-  - http://bigmultiplayerchess.com/manifest.webapp
-  - http://bigmultiplayerchess.com/manifest-noads.webapp
+  - http://rewordgame.com/static/music/*
+  - http://rewordgame.com/sitemap
+  - http://rewordgame.com/manifest.webapp
+  - http://rewordgame.com/manifest-noads.webapp
   - https://rewordgame.appspot.com/buy
   # enabled_rewriters:
   # - CollapseWhitespace

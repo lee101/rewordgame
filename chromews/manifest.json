@@ -6,10 +6,10 @@
     "manifest_version": 2,
     "app": {
         "urls": [
-            "*://bigmultiplayerchess.com/"
+            "*://rewordgame.com/"
         ],
         "launch": {
-            "web_url": "http://bigmultiplayerchess.com/"
+            "web_url": "http://rewordgame.com/"
         }
     },
     "icons": {
