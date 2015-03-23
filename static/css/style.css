@@ -373,6 +373,14 @@ body {
     display: inline-table;
   }
 }
+.reword-header {
+  font-family: initial, serif;
+  font-size: 30px;
+  color: #5168a2;
+}
+.reword-header-text {
+  margin-top: 20px;
+}
 .icon-container__icon {
   display: table-cell;
   vertical-align: middle;

@@ -82,7 +82,7 @@ libraries:
 - name: jinja2
   version: "2.6"
 
-instance_class: F2
+instance_class: F1
 automatic_scaling:
   max_pending_latency: 7.5s
 # automatic_scaling:

@@ -1,21 +1,7 @@
 <div class="ws-header">
-    {% if path|length > 1 %}
-        <div class="ws-header--item">&nbsp;
-            <button type="button" class="back-btn gameon-btn-hg btn btn-danger btn-lg" onclick="return APP.stepBack()">
-                <i
-                        class="fa fa-arrow-left"></i></button>
 
-        </div>
-    {% else %}
-        <div class="ws-header--item">&nbsp;
-            <button type="button" class="back-btn gameon-btn-hg btn btn-danger btn-lg" disabled="disabled">
-                <i
-                        class="fa fa-arrow-left"></i></button>
-
-        </div>
-    {% endif %}
-    <a href="/" title="reWord Game" class="ws-header--item big-multiplayer-chess-logo big-shadow" onclick="return APP.gotoLink(this)"
+    <a href="/" title="reWord Game" class="ws-header--item reword-header" onclick="return APP.gotoLink(this)"
        target="_blank" data-bypass="1">
-        ReWord Game
+        <span class="reword-header-text">re </span><img src="/static/img/reword-game-logo512.png" width="64" height="64"><span class="reword-header-text">ord Game</span>
     </a>
 </div>
