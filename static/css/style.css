@@ -374,12 +374,13 @@ body {
   }
 }
 .reword-header {
-  font-family: initial, serif;
+  font-family: serif;
   font-size: 30px;
   color: #5168a2;
 }
 .reword-header-text {
-  margin-top: 20px;
+  position: relative;
+  top: 5px;
 }
 .icon-container__icon {
   display: table-cell;
