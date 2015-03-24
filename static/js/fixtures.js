@@ -16,11 +16,31 @@ var fixtures = (function () {
             "correct_ordering": [0, 1, 3, 2]
         },
         {
-            "words": ['and', 'this', 'puzzle', 'spans', 'multiple lines', 'the', 'test of time'],
-            "correct_ordering": [1, 2, 3, 4, 0, 5, 6],
+            "words": ['words', "can't", 'be', 'swapped', 'some'],
+            "correct_ordering": [4, 0, 1, 2, 3],
+            "unmovables": {
+                0: 1,
+                1: 1,
+                2: 1,
+                3: 1
+            }
+        },
+        {
+            "words": ['joe liked', 'joe', 'mary', 'mary', 'and',  'liked', 'too'],
+            "correct_ordering": [0, 2, 4, 3, 5, 1, 6],
+            "unmovables": {
+                0: 1,
+                2: 1,
+                3: 1,
+                5: 1
+            }
+        },
+        {
+            "words": ['and', 'this', 'puzzle', 'uses', 'words', 'sentences'],
+            "correct_ordering": [1, 2, 3, 4, 0, 5],
             "unmovables": {
                 4: 1,
-                6: 1
+                5: 1
             }
         },
         {
