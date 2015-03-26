@@ -4,9 +4,6 @@
     APP.routerViews = {};
 
     APP.goto = function (name) {
-        if (APP.game) {
-            APP.game.destruct();
-        }
         APP.router.navigate(name, {trigger: true});
         return false
     };

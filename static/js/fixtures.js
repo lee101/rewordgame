@@ -26,7 +26,7 @@ var fixtures = (function () {
             }
         },
         {
-            "words": ['joe liked', 'joe', 'mary', 'mary', 'and',  'liked', 'too'],
+            "words": ['joe liked', 'joe', 'mary', 'mary', 'and', 'liked', 'too'],
             "correct_ordering": [0, 2, 4, 3, 5, 1, 6],
             "unmovables": {
                 0: 1,
@@ -36,16 +36,41 @@ var fixtures = (function () {
             }
         },
         {
+            "words": ['beef', 'stayed', 'market', 'roast', 'home', 'went to'],
+            "correct_ordering": [5, 2, 1, 4, 3, 0]
+        },
+
+        {
+            "correct_words": [
+                'The',
+                'quick',
+                'brown',
+                'fox',
+                'jumps',
+                'over',
+                'the',
+                'lazy',
+                'dog.'
+            ],
+            "scrambling": [
+                5,
+                8,
+                2,
+                6,
+                3,
+                0,
+                1,
+                4,
+                7
+            ]
+        },
+        {
             "words": ['and', 'this', 'puzzle', 'uses', 'words', 'sentences'],
             "correct_ordering": [1, 2, 3, 4, 0, 5],
             "unmovables": {
                 4: 1,
                 5: 1
             }
-        },
-        {
-            "words": ['beef', 'stayed', 'market', 'roast', 'home', 'went to'],
-            "correct_ordering": [5, 2, 1, 4, 3, 0]
         },
         {
             "words": ['dust', 'brick', 'house', 'door', 'roof', 'window'],
@@ -62,11 +87,34 @@ var fixtures = (function () {
             }
         }
     ];
+    self.scrambleWords = function (words, scrambling) {
+        var scrambled_words = [];
+        for (var orderIdx = 0; orderIdx < scrambling.length; orderIdx++) {
+            var scrambleIdx = scrambling[orderIdx];
+            scrambled_words[orderIdx] = words[scrambleIdx]
+        }
+        return scrambled_words;
+    };
+    self.descrambling = function (scrambling) {
+        var descrambling = [];
+        var indexOf_map = {};
+        for (var i = 0; i < scrambling.length; i++) {
+            indexOf_map[scrambling[i]] = i;
+        }
+        for (var i = 0; i < scrambling.length; i++) {
+            descrambling[i] = indexOf_map[i];
+        }
+        return descrambling;
+    };
     for (var i = 0; i < self.levels.length; i++) {
         var level = self.levels[i];
-        level.id = i;
+        level.id = i + 1;
         if (!level.unmovables) {
             level.unmovables = {};
+        }
+        if (level.correct_words) {
+            level.words = self.scrambleWords(level.correct_words, level.scrambling);
+            level.correct_ordering = self.descrambling(level.scrambling)
         }
     }
     return self;
