@@ -44,7 +44,6 @@ var fixtures = (function () {
             "correct_words": [
                 'The',
                 'quick',
-                'brown',
                 'fox',
                 'jumps',
                 'over',
@@ -54,7 +53,6 @@ var fixtures = (function () {
             ],
             "scrambling": [
                 5,
-                8,
                 2,
                 6,
                 3,
@@ -66,7 +64,7 @@ var fixtures = (function () {
         },
         {
             "words": ['and', 'turtle', 'big', 'slow', 'the', 'was'],
-            "correct_ordering": [1, 3, 0, 5, 2, 4],
+            "correct_ordering": [4, 1, 5, 2, 0, 3],
             "unmovables": {
                 2: 1,
                 3: 1
