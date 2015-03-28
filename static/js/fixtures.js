@@ -65,11 +65,11 @@ var fixtures = (function () {
             ]
         },
         {
-            "words": ['and', 'this', 'puzzle', 'uses', 'words', 'sentences'],
-            "correct_ordering": [1, 2, 3, 4, 0, 5],
+            "words": ['and', 'turtle', 'big', 'slow', 'the', 'was'],
+            "correct_ordering": [1, 3, 0, 5, 2, 4],
             "unmovables": {
-                4: 1,
-                5: 1
+                2: 1,
+                3: 1
             }
         },
         {
