@@ -220,6 +220,136 @@ var fixtures = (function () {
                 2,
                 7
             ]
+        },
+        {
+            "correct_words": [
+                "The",
+                "fastest",
+                "turtle",
+                "couldn't",
+                "go",
+                "any",
+                "faster",
+                "than",
+                "the",
+                "slowest",
+                "cheetah."
+            ],
+            "scrambling": [
+                6,
+                4,
+                5,
+                10,
+                0,
+                8,
+                1,
+                3,
+                7,
+                9,
+                2
+            ]
+        },
+        {
+            "correct_words": [
+                "They",
+                "where",
+                "at",
+                "their",
+                "house",
+                "and",
+                "he",
+                "said",
+                "look",
+                "over",
+                "there",
+                "they're",
+                "coming!"
+            ],
+            "scrambling": [
+                6,
+                4,
+                5,
+                10,
+                0,
+                8,
+                11,
+                1,
+                3,
+                7,
+                12,
+                9,
+                2
+            ]
+        },
+        {
+            "correct_words": [
+                "We're",
+                "going",
+                "to",
+                "find",
+                "out",
+                "where",
+                "the",
+                "best",
+                "clothes",
+                "are",
+                "to",
+                "wear."
+            ],
+            "scrambling": [
+                4,
+                10,
+                5,
+                6,
+                11,
+                8,
+                3,
+                0,
+                1,
+                2,
+                7,
+                9
+            ]
+        },
+        {
+            "correct_words": [
+                "The",
+                "fastest",
+                "animal",
+                "is",
+                "actually",
+                "the",
+                "falcon,",
+                "as",
+                "for",
+                "land",
+                "mammal",
+                "that'll",
+                "be",
+                "the",
+                "cheetah",
+                "of",
+                "course."
+            ],
+            "scrambling": [
+                4,
+                10,
+                13,
+                5,
+                6,
+                12,
+                15,
+                8,
+                3,
+                16,
+                14,
+                0,
+                1,
+                2,
+                7,
+                11,
+                9
+            ]
         }
         //{
         //    "words": ['dust', 'brick', 'house', 'door', 'roof', 'window'],
