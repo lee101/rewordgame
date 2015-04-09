@@ -46,7 +46,7 @@ var rewordgame = (function () {
                     };
 
 
-                    $wordEl.on('mousedown', function (evt) {
+                    $wordEl.on('mousedown touchstart', function (evt) {
                         if (reSelf.unmovable) {
                             return false;
                         }
@@ -109,8 +109,8 @@ var rewordgame = (function () {
                         }
                     };
 
-                    $(document).on('mousemove', reSelf.mouseMove);
-                    $(document).on('mouseup', function (evt) {
+                    $(document).on('mousemove touchmove', reSelf.mouseMove);
+                    $(document).on('mouseup touchend', function (evt) {
                         reSelf.stopDragging();
                     });
 
