@@ -69,15 +69,18 @@ var rewordgame = (function () {
                     var animateTransitionFinished = true;
                     reSelf.mouseMove = function (evt) {
                         if (draggingStates[idx]) {
-                            var mousePosX = evt.pageX || evt.originalEvent.touches[0].pageX;
-                            var mousePosY = evt.pageY || evt.originalEvent.touches[0].pageY;
+                            if (evt.originalEvent && evt.originalEvent.touches) {
+                                evt = evt.originalEvent.touches[0]
+                            }
+                            var mousePosX = evt.pageX;
+                            var mousePosY = evt.pageY;
 
                             $wordEl.addClass('reword-word--selected');
 
                             $mouseFollower.text(word);
                             $mouseFollower.css({
                                 left: mousePosX - $wordEl.width() / 2,
-                                top: mousePosY - $wordEl.height()
+                                top: mousePosY - $wordEl.height() - (evt.radiusY || 0)
                             });
 
                             if (animateTransitionFinished) {
