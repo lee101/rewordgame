@@ -1,7 +1,7 @@
 {
     "name": "reWord Game",
-    "short_name": "reWord Game - Massive Chess Board Game!",
-    "description": "Giant Chess! 6+ Players battling on the same chess board! Capture a king and gain another empire! Pawns can move any direction!",
+    "short_name": "reWord Game - So Sentences Seem Sensible!",
+    "description": "Swap Words to Make Sense of Strangeness in this new word puzzle game! Play reWord Game Free Online!",
     "version": "4",
     "manifest_version": 2,
     "app": {
@@ -13,9 +13,9 @@
         }
     },
     "icons": {
-        "128": "/static/img/big-multiplayer-chess-logo128.png",
-        "64": "/static/img/big-multiplayer-chess-logo64.png",
-        "60": "/static/icons/apple-touch-icon-60x60.png"
+        "128": "/static/img/re-word-game-128.png",
+        "64": "/static/img/re-word-game-64.png",
+        "60": "/static/icons/re-word-game-60.png"
     },
     "fullscreen": "true",
     "developer": {
