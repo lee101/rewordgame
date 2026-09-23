@@ -2,18 +2,19 @@
 
 {% block headers %}
 
-    {% set title = 'reWord Game - So Sentences Seem Sensible!' -%}
-    {% set description = 'Swap Words to Make Sense of Strangeness in this new word puzzle game! Play reWord Game Free Online!' -%}
+    {% set title = 'reWord Game - Swap Words So Sentences Make Sense' -%}
+    {% set description = 'Free online word puzzle: drag and swap jumbled words until the sentence makes sense. No signup, play instantly in your browser.' -%}
 
-    <meta charset="utf-8">
-    <title>{{ title }}</title>
+        <title>{{ title }}</title>
     <meta name="description"
           content="{{ description }}">
 
     <meta name="keywords" content="re word game, word game, word games">
     <meta property="og:title" content="{{ title }}">
-    <meta property="og:url" content="http://rewordgame.com">
-    <meta property="og:image" content="http://rewordgame.com/static/img/reword-game-logo512.png">
+    <meta property="og:url" content="https://rewordgame.v5games.com{{ path }}">
+    <meta property="og:image" content="https://rewordgame.v5games.com/static/img/og-reword.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:description"
           content="{{ description }}">
     <meta property="og:type" content="game">
@@ -21,6 +22,13 @@
     <meta property="fb:admins" content="337972272904903">
 
 
+{% endblock %}
+
+{% block intro %}
+    <section class="rw-intro">
+        <h1 class="rw-title">reWord Game: swap the words until the sentence makes sense</h1>
+        <p class="rw-how"><strong>How to play:</strong> drag a word left or right to swap it with its neighbour. Get every word in the right order to clear the level. Words without a dotted underline are locked.</p>
+    </section>
 {% endblock %}
 
 {% block mainbody %}

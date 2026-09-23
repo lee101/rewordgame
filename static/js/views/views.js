@@ -54,7 +54,7 @@
             } else {
                 self.$el.html(evutils.render('static/templates/shared/donelevel.jinja2'));
                 window.setTimeout(function () {
-                    APP.router.level(fixtures.levels[self.level.id + 1])
+                    APP.router.level(fixtures.levels[self.level.id])
                 }, 1000);
             }
             return self

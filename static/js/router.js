@@ -50,13 +50,15 @@
     };
 
     var currentView;
+    var firstRender = true;
 
     function animateTo(view) {
         var $mainbody = $('#mainbody');
         var duration = 300;
-        if (gameon.noAnimation) {
+        if (gameon.noAnimation || firstRender) {
             duration = 0;
         }
+        firstRender = false;
 
         $mainbody.fadeOut(duration, function () {
             if (currentView) {
@@ -97,7 +99,6 @@
         APP.header.path = location.pathname;
         $('#headerbody').html(APP.header.render().el);
         $('#footerbody').html(APP.footer.render().el);
-        $.ajax({ url: 'http://platform.twitter.com/widgets.js', dataType: 'script', cache: true});
     };
 
 

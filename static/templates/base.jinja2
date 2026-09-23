@@ -1,7 +1,7 @@
 {% import "gameon/templates/templates.jinja2" as gameon %}
 {% import "templates/macros.jinja2" as macros with context %}
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
 
@@ -9,6 +9,10 @@
     {% endblock %}
 
     {{ macros.headers() }}
+    <link rel="canonical" href="https://rewordgame.v5games.com{{ path }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://rewordgame.v5games.com/static/img/og-reword.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"reWord Game","url":"https://rewordgame.v5games.com/","image":"https://rewordgame.v5games.com/static/img/og-reword.png","description":"Free online word puzzle: drag and swap jumbled words until the sentence makes sense.","genre":["Word game","Puzzle"],"gamePlatform":"Web browser","applicationCategory":"Game","operatingSystem":"Any","inLanguage":"en","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Addicting Word Games","url":"https://addictingwordgames.com"}}</script>
 
     {{ gameon.cssheaders() }}
     {{ macros.cssheaders() }}
@@ -47,6 +51,7 @@
         {% include "/templates/shared/header.jinja2" %}
     </div>
 
+    {% block intro %}{% endblock %}
     <div id="mainbody">
         {% block mainbody %}
 

@@ -4,6 +4,8 @@ var rewordgame = (function () {
 
     self.Game = function (level) {
         var gameState = {};
+        gameState.hintsUsed = 0;
+        APP.currentLevel = level.id;
 
         function construct() {
 
@@ -16,6 +18,22 @@ var rewordgame = (function () {
             var $mouseFollower = $('#mouse-follower');
 
             var $words = $('<div class="reword-words"></div>');
+            var $hintBtn = $('<button type="button" class="btn btn-warning reword-hint-btn">Hint</button>');
+            $hintBtn.on('click', function () {
+                var $wordEls = $words.find('.reword-word');
+                for (var h = 0; h < $wordEls.length; h++) {
+                    var $w = $wordEls.eq(h);
+                    var currentIdx = $w.data('index');
+                    if (currentIdx !== level.correct_ordering[h] && !level.unmovables[currentIdx]) {
+                        $w.addClass('reword-word--hint');
+                        gameState.hintsUsed++;
+                        setTimeout(function () {
+                            $w.removeClass('reword-word--hint');
+                        }, 2000);
+                        return;
+                    }
+                }
+            });
             for (var i = 0; i < level.words.length; i++) {
 
                 var createReword = function (idx) {
@@ -126,7 +144,9 @@ var rewordgame = (function () {
                 $words.append(word.render());
             }
 
+            $html.prepend('<p class="rw-level">Level ' + level.id + ' of ' + fixtures.levels.length + '</p>');
             $html.append($words);
+            $html.append($hintBtn);
 
             gameState.endHandler = new gameState.EndHandler();
             gameState.endHandler.render($html.find('.mm-end-condition'));
