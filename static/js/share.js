@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    var SITE = 'https://rewordgame.v5games.com/';
+    var SITE = 'https://rewordgame.com/';
     function shareText() {
         var lvl = window.APP && APP.currentLevel;
         return lvl ? 'I reached level ' + lvl + ' in reWord Game. Can you unscramble the sentences?' :
