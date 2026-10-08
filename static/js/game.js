@@ -1,3 +1,9 @@
+function thGame(e, level, extra) {
+    var p = {game: 'rewordgame', level: level.id};
+    for (var k in extra) p[k] = extra[k];
+    try { window.th && window.th('track', e, p); } catch (x) {}
+}
+
 var rewordgame = (function () {
     "use strict";
     var self = {};
@@ -8,6 +14,7 @@ var rewordgame = (function () {
         APP.currentLevel = level.id;
 
         function construct() {
+            thGame('game_started', level);
 
             var $html = $(evutils.render('static/templates/shared/game.jinja2'));
             var draggingStates = [];
@@ -197,6 +204,10 @@ var rewordgame = (function () {
                 //show done
 
                 //gameState.destruct();
+                if (!gameState.thDone) {
+                    gameState.thDone = true;
+                    thGame('game_completed', level, {won: true, hints_used: gameState.hintsUsed});
+                }
                 gameon.getUser(function (user) {
                     if (user.levels_unlocked < level.id) {
                         user.saveLevelsUnlocked(level.id);

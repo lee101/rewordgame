@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    {{ macros.th() }}
 
     {% block headers %}
     {% endblock %}
@@ -20,7 +21,7 @@
     {% block css %}
     {% endblock %}
 
-    {{ gameon.jsheaders() }}
+    {{ macros.gameonjs() }}
 
     {{ macros.jsvars() }}
     {{ macros.jsheaders() }}
