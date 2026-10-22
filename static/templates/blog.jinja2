@@ -1,0 +1,49 @@
+{% extends 'templates/base.jinja2' %}
+
+{% block headers %}
+    {% if post %}
+        {% set title = post.title -%}
+        {% set description = post.description -%}
+    {% else %}
+        {% set title = 'reWord Game Blog: Word Puzzle Tips and Guides' -%}
+        {% set description = 'Tips, guides and ideas for word puzzle fans: solve jumbled sentences faster, learn vocabulary and see how reWord Game works.' -%}
+    {% endif %}
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:url" content="https://rewordgame.v5games.com{{ path }}">
+    <meta property="og:image" content="https://rewordgame.v5games.com/static/img/og-reword.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:type" content="{{ 'article' if post else 'website' }}">
+    <meta property="og:site_name" content="reWord Game">
+    {% if post %}
+    <script type="application/ld+json">{{ article_ld|safe }}</script>
+    {% endif %}
+{% endblock %}
+
+{% block mainbody %}
+<div class="article-theme rw-blog">
+{% if post %}
+    <p><a href="/blog" data-bypass="1">All posts</a></p>
+    <h1>{{ post.title }}</h1>
+    <p><small>Published {{ post.date }}</small></p>
+    {{ post_body|safe }}
+    <h2>More from the blog</h2>
+    <ul>
+    {% for p in posts if p.slug != post.slug %}
+        <li><a href="/blog/{{ p.slug }}" data-bypass="1">{{ p.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h1>reWord Game Blog</h1>
+    <p class="lead">Tips and guides for word puzzle fans.</p>
+    <ul>
+    {% for p in posts %}
+        <li><h2><a href="/blog/{{ p.slug }}" data-bypass="1">{{ p.title }}</a></h2><p>{{ p.description }}</p></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+</div>
+{% endblock %}
